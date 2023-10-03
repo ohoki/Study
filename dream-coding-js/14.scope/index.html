@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    fetch(
+      'https://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json'
+    ).then((response) => response.json()) //json이지만 promise를 리턴한다
+    .then((data) => console.log(data.dataseries));  
+  </script>
+</body>
+</html>
