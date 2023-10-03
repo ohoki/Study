@@ -1,0 +1,29 @@
+package yhBank.board;
+
+import java.util.Scanner;
+
+public class BoardService {
+	Scanner sc = new Scanner(System.in);
+	
+	//게시물 등록
+	public void insertContent() {
+		Board account = new Board();
+		
+		System.out.println("게시물을 등록합니다.");
+		
+		System.out.println("게시물의 제목을 입력해주세요.");
+		String title = sc.nextLine();
+		
+		System.out.println("게시물의 내용을 입력해주세요.");
+		String content = sc.nextLine();
+		
+		
+		int result = AccountDAO.getInstance().insertAccount(account);
+		
+		if(result > 0) {
+			System.out.println(account.getMemberId() + "님의 새로운 계좌(" + account.getAccountNumber()+")가 개설되었습니다.");
+		} else {
+			System.out.println("게좌 개설에 실패하였습니다.");
+		}
+	}
+}

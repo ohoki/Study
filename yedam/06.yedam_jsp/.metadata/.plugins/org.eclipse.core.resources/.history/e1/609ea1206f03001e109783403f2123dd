@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div align="center"><h1>로그인</h1></div>
+	<form action="memberLoginForm.do" method="post">
+		<fieldset>
+			<label for="memberId">아이디:</label>
+			<input type="email" name="memberId" id="memberId">
+			
+			<label for="memberPw">비밀번호:</label>
+			<input type="password" name="memberPw" id="memberPw">
+			
+			<input type="submit" value="로그인">
+    	</fieldset>
+	</form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+package co.micol.notice.main.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import co.micol.notice.common.Command;
+import co.micol.notice.member.service.MemberService;
+import co.micol.notice.member.service.MemberVO;
+import co.micol.notice.member.serviceImpl.MemberServiceImpl;
+
+public class MemberInsert implements Command {
+
+	@Override
+	public String exec(HttpServletRequest request, HttpServletResponse response) {
+		//회원가입을 수행한다.
+		MemberService ms = new MemberServiceImpl();
+		MemberVO vo = new MemberVO();
+		return null;
+	}
+
+}

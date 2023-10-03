@@ -1,0 +1,8 @@
+package co.youngho.prj.common;
+
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public interface Command {
+	public String exec(HttpRequest request, HttpResponse response);
+}

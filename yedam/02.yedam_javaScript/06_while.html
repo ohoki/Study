@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //-------------- while 문 ------------------------------
+    let sum = 0;
+    while(sum < 10) {
+      sum += 1;
+      console.log(sum);
+    }
+    console.log("while 탈출!!");
+
+    sum = 0;
+    while(true) {
+      sum += 1;
+      if(sum == 10) {
+        break;
+      }
+    }
+    // 1~100까지의 수 중에서 짝수만 출력
+    let even = 0;
+    while(even <= 100) {
+      if(even%2 == 0 && even != 0) {
+      console.log("1~100사의 짝수 :" + even);
+      }
+      even++;
+    }
+    //--------------do while문 -----------------------------------
+    sum = 0;
+    do{
+      sum += 1;
+    } while( sum<1);
+    // 1~100R까지의 숫자 구해보는 do~while
+    let temp = 1;
+    do{
+      console.log(temp);
+      temp++;
+    } while(temp <= 100);
+
+    //------------------break, continue------------------------------
+    sum = 0;
+    while(true) {
+      sum += 5;
+      if(sum == 10) {
+        console.log("break 종료");
+        break;
+      }
+    }
+
+    for(let i=1; i<=10; i++) {
+      if(i%2 == 1) {
+        continue; // 다시 올려보냄
+      }
+      console.log(i);
+    }
+  </script>
+</body>
+</html>

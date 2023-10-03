@@ -1,0 +1,5 @@
+package co.micol.notice.product.service;
+
+public interface ProductService {
+
+}

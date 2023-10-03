@@ -1,0 +1,18 @@
+package co.micol.notice.common;
+
+public class DataSource {
+	private static DataSource dataSource;
+	private String driver = "oracle.jdbc.driver.OracleDriver";
+	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	private String user;
+	private String password;
+	
+	private DataSource() {}
+	
+	public DataSource getInstance() {
+		if(dataSource == null) {
+			dataSource = new DataSource();
+		}
+		return dataSource;
+	}
+}

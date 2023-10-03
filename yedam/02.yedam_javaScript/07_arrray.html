@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //----------------------- 배열 --------------------------------------
+    let arr = [];
+
+    /**--------------배열에 데이터 삽입------------------**/
+    
+    // 1)배열.push(데이터);
+    arr.push("1");
+    arr.push("2");
+    console.log(arr);  //['1', '2']
+    // 2)배열.unshift(데이터);
+    arr.unshift("3");
+    arr.unshift("4");
+    console.log(arr); //['4', '3', '1', '2']
+
+    /**--------------배열에 데이터 삭제------------------**/
+    
+    // 1)배열.pop(데이터);
+    arr.pop();
+    console.log(arr); //['4', '3', '1']
+    // 2)배열.unshift(데이터);
+    arr.shift();
+    console.log(arr); //['3', '1']
+
+    /**--------------배열에 데이터 입력, 삭제, 변경 -----------------**/
+
+    //배열.splice();
+    arr.splice(0, 0, "무지"); //0번째 인덱스에 삭제하지 않고 "무지" 데이터 입력
+    console.log(arr); //['무지', '3', '1']
+
+    arr.splice(1,0,"어피치");
+    console.log(arr); //['무지', '어피치', '3', '1']
+
+    arr.splice(2, 1, "라이언");
+    console.log(arr); //['무지', '어피치', '라이언', '1']
+
+    arr.splice(2, 2);
+    console.log(arr); //['무지', '어피치']
+
+    /**--------------------- 배열의 길이 또는 데이터의 개수 --------------------**/
+
+    console.log(arr.length); // 2
+
+    //---------------------- 배열 + 반복분 활용 ---------------------------------
+    
+    for(let i=0; i<10; i++) {
+      let word = prompt("배열에 넣을 값을 입력해주세요.");
+      arr.push(word);
+    }
+    console.log(arr);
+    //히든 문자를 입력하게 되면 멈추는 반복문
+    while(true) {
+      let word = prompt("데이터 입력");
+      if(word == "exit") {
+        alert("히든 문자 입력");
+        break;
+      }
+      arr.unshift(word);
+    }
+    console.log(arr);
+    //배열 값 꺼내기
+    for(let i=0; i<arr.length; i++) {
+      console.log(arr[i]);
+    };
+
+    //최대값 최소값 구하기
+
+    let arr2 = [111,223,83,4,67,9,2,47,19,12,5,37,5,94,11];
+    let max = arr2[0];
+    let min = arr2[0];
+    let arrSum = 0;
+
+    for(let i=0; i<arr2.length; i++) {
+      if(max < arr2[i]) { max = arr2[i]; }
+      if(min > arr2[i]) { min = arr2[i]; }
+    }
+    console.log("최대값은 "+max);
+    console.log("최소값은 "+min);
+
+    for(let i=0; i<arr2.length; i++) {
+      if(max == arr2[i]) {
+        console.log("최대값의 인덱스는 : "+i);
+      } else if(min == arr2[i]) {
+        console.log("최소값의 인덱스는 : "+i);
+      }
+    }
+
+    for(let i=0; i<arr2.length; i++) {
+      if(arr[i] != max && arr[i] != min) {
+        arrSum += arr2[i];
+      }
+    }
+    console.log("배열의 합계는 "+arrSum);
+    console.log("배열의 평균은 "+(arrSum/(arr2.length-2)));
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+    *{
+        font-family: sans-serif;
+    }
+    #list{
+        border: 1px dotted white;
+        text-align: left;
+        font-size: 20px;
+        background-color: blueviolet;
+        color: white;
+        width: 63.5vw;
+    }
+    #history{
+        margin-top: 30px;
+        border: 1px dotted white;
+        text-align: left;
+        font-size: 20px;
+        background-color: gray;
+        color: white;
+        width: 63.5vw;
+    }
+    button{
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    p{
+        font-size : 15px;
+    }
+</style>
+<body>
+  <h1>To Do List</h1>
+  <input type="text" id="doList" name="doList" style="width: 50vw;">
+  <button type="button" onclick="saveList()">ListUp</button>
+  <button type="button" onclick="deleteItem()">Delete</button>
+  <br>
+  <br>
+  <h2>DO LIST</h2>
+  <!-- 해야 할 목록 -->
+  <div id="list">
+
+  </div>
+  <h2>HISTORY</h2>
+  <!-- 진행한 목록 -->
+  <div id="history">
+
+  </div>
+
+  <script>
+    function deleteItem() {
+      let ckb = document.querySelectorAll("input[type=checkbox]:checked");
+      //기본 반복문
+      for(let i=0; i<ckb.length; i++) {
+        ckb[i].parentNode.remove();
+      }
+      //-----------------------------for..of
+      // for(let i of ckb) {
+      //   i.parentNode.remove();
+      // }
+      //-----------------------------for..in
+      // for(let i in ckb) {
+      //   ckb[i].parentNode.remove();
+      // }
+    }
+    
+    function saveList() {
+      //input 값 가져오기
+      let doList = document.getElementById("doList");
+      let p = document.createElement("p");
+      p.textContent = doList.value;
+      //체크박스 만들기
+      let ckb = document.createElement("input");
+      ckb.setAttribute("type", "checkbox");
+      p.prepend(ckb);
+      //완료버튼 만들기
+      let btn = document.createElement("button");
+      btn.textContent = "complete";
+      //속성 추가 ( do list -> history )
+      btn.setAttribute("onclick", "move()");
+      btn.setAttribute("type", "button");
+      p.appendChild(btn);
+      //div에 추가하기
+      let list = document.getElementById("list");
+      list.appendChild(p);
+      doList.value = "";
+      doList.focus();
+    }
+
+    function move() {
+      checkedToggle(event.target);
+      let history = document.getElementById("history");
+      event.target.setAttribute("onclick", "before()");
+      event.target.textContent = "History";
+      history.appendChild(event.target.parentNode);
+    }
+
+    function before() {
+      checkedToggle(event.target);
+      let list = document.getElementById("list");
+      event.target.setAttribute("onclick", "move()");
+      event.target.textContent = "Complete";
+      list.appendChild(event.target.parentNode);
+    }
+
+    function checkedToggle(target) {
+      target.parentNode.children[0].checked = false;
+    }
+
+  </script>
+</body>
+</html>

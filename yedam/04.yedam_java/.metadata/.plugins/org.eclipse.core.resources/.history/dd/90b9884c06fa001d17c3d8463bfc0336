@@ -1,0 +1,28 @@
+package yhBank.board;
+
+import java.util.Scanner;
+
+public class BoardService {
+	Scanner sc = new Scanner(System.in);
+	
+	//게시물 등록
+	public void insertContent() {
+		Board account = new Board();
+		
+		System.out.println("게시물을 등록합니다.");
+		
+		System.out.println("게시물의 제목을 입력해주세요.");
+		String title = sc.nextLine();
+		
+		System.out.println("게시물의 내용을 입력해주세요.");
+		String content = sc.nextLine();
+		
+		int result = BoardDAO.getInstance().insertContent(title, content);
+		
+		if(result > 0) {
+			System.out.println("등록되었습니다.");
+		} else {
+			System.out.println("등록에 실패했습니다.");
+		}
+	}
+}

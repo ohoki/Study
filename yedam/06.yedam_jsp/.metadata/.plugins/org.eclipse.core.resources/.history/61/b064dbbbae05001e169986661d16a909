@@ -1,0 +1,8 @@
+package co.youngho.prj.controller;
+
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("*.do")
+public class FrontController {
+
+}

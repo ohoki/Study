@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //----------------------- 단어 --------------------------------------------------------------------
+    /**
+     * 표현식(단어, 데이터) - 10, const, + 등등
+     * 
+     * 변수 - 데이터를 담을 수 있는 그릇 (변수만 봐도 어떠한 용도인지 알아볼 수 있도록 이름을 지어야함)
+     * 
+     * 문장(단어와 데이터 등이 이루어져서) - console.log("안녕"); / 10 + 10;
+     * 
+     * 프로그램(여러개의 문장이 모여서 만들어짐)
+     *
+     *키워드 (예약어) - 자바스크립트에서 미리 선점한 단어들
+     *  
+     * 주석 - 개발 히스토리 및 소통시에 사용됨 **/
+
+    //출력 - 데이터가 잘 작동되고 있는지 확인용으로 많이 사용 됨
+
+    //---------------------- 데이터 타입 ------------------------------------------------------------------
+    /** 원시형 데이터 타입
+     * 1. 숫자 ( let num = 1; )
+     * 2. 문자 ( let str = "javascript"; )
+     * 3. 불리언 ( true / false ) - 참/거짓 판단할 때 사용
+     * 4. null ( 정체모를 데이터 -> 변수를 초기화하지 않았다. )
+     * 5. undefined ( 빈 값 -> 변수의 데이터값이 정의되지 않았다. )
+     * 6. NaN ( Not a Number )
+     * */
+
+    let num = 1;
+    console.log(typeof num); //타입 확인
+
+    let str = "javascript";
+    console.log(typeof str);
+
+    let var1;
+    console.log(var1); //undefined
+
+    let str2 = "1";
+    console.log(typeof str2); //string
+    let num2 = Number(str2);
+    console.log(typeof num2); //number
+
+    let str3 = "java";
+    console.log(typeof str3); //string
+    let num3 = Number(str3);
+    console.log(num3); // NaN (데이터 타입은 number이지만 숫자로 표현할 수가 없음 )
+
+    /** 참조형 데이터 타입**/
+
+    // ---------- 자료형 변환 ( 데이터 타입을 변환한다 ) ---------------------------------------------------------
+
+    let str4 = "12345";
+    let str5 = "123.123";
+    let str6 = "12345aaa";
+    
+    //1. Number() - 문자를 숫자로 변환
+    // 소수점이 존재하면 포함해서 변환, 단 숫자에 문자가 포함되어 있으면 안됨 (NaN)
+    let num4 = Number(str5);
+    console.log(num4); //123.123
+    let num5 = Number(str6);
+    console.log(num5); //NaN
+
+    //2. ParseInt() - 문자를 숫자(정수)로 변환
+    //숫자에 문자가 포함되어 있으면 문자 빼고 숫자로 변환
+    let num6 = parseInt(str6);
+    console.log(num6); //12345
+    console.log(parseInt(str5)); //123
+
+    //3. ParseFloat() - 문자를 숫자(실수)로 변환
+    //숫자에 문자가 포함되어 있으면 문자 빼고 숫자로 변환
+    console.log(parseFloat(str5)); //123.123
+
+    //4. toString()
+    let str7 = num4.toString();
+    console.log(str7);
+    //5. String()
+    num3 = null;
+    let str8 = String(num3);
+    console.log(typeof str8); //데이터 타입은 string
+    console.log(num3); //값은 null
+
+    //------------------- 변수 이름 정하는 규칙 -----------------------------------------------------------------------
+    /**
+     * 숫자로 시작 X
+     * 공백 포함 X
+     * 대소문자 구별
+     * 주로 소문자로 표현한다( 한단어 )
+     * 스네이크표현식( _ ) 또는 카멜표현식 사용 ( 두단어 이상 )
+     * 자바스크립트에서 미리 선점한 키워드( 예약어 ) 사용 X
+     **/
+
+    //----------------- 변수 -----------------------------------------------------------------------------------------
+    /** 
+     * var - 어디서든지 사용할 수 있는 변수
+     * 
+     * let - 생성 후 쓸 수 있는 변수
+     * 
+     * const - 상수 ( 변하지 않는 불변의 값 - 데이터 입력 후 변경 불가 )
+     **/
+    
+     //var
+    console.log(test1);
+    var test1;
+
+    //let
+    // console.log(test2); --> error
+    let test2;
+
+    /**
+     * 변수의 사용 범위 ( 스코프 )
+     * 기본적으로 { } 안에서 생성되고 벗어나면 삭제되는게 원칙
+     * 하지만 var의 경우 이러한 원칙을 무시한다.
+     **/
+
+    {
+      let test4 = 5;
+      var test5 = 5;
+    }
+    // console.log(test4); --> 스코프를 벗어나서 변수가 삭제되서 출력할 수 없음
+    console.log(test5); // --> var는 이러한 원칙을 무시함
+
+    let num9 = 10;
+    console.log(typeof num9);  //number
+    num9 = "10";
+    console.log(typeof num9); //string
+    // JS는 자바의 데이터 타입 상관없이 변수를 재사용 할 수 있다.
+  </script>
+</body>
+</html>

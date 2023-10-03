@@ -1,0 +1,8 @@
+package co.micol.notice.service;
+
+import lombok.Getter;
+import lombok.Setter;
+
+public class NoticeVO {
+
+}

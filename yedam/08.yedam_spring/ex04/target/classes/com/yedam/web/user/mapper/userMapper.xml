@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.yedam.web.user.mapper.UserMapper">
+  	<select id="getMemeber" resultType="MemberVO">
+	SELECT login_id id,
+			'{noop}' || password pwd,
+			role_name role
+	FROM t_user JOIN t_user_role
+		ON t_user.id = t_user_role.user_id
+		JOIN t_role
+		ON t_user_role.role_id = t_role.id
+	WHERE login_id = #{username}
+  	</select>
+  </mapper>

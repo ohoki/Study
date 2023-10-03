@@ -1,0 +1,55 @@
+package yhBank.board;
+
+import java.util.List;
+import java.util.Scanner;
+
+import yhBank.account.AccountDAO;
+
+public class BoardService {
+	Scanner sc = new Scanner(System.in);
+	
+	//전체 게시물 보기
+	public void boardList() {
+		List<Board> list = BoardDAO.getInstance().boardList();
+	
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getBoardNum()+ "번 게시물 | 작성자 : " + list.get(i).getMemberId() + " 제목 : " + list.get(i).getBoardTitle() + " 내용 : " + list.get(i).getBoardContent() + " 작성일 : " + list.get(i).getBoardDate());
+		}
+	}
+	
+	//게시물 등록
+	public void insertContent() {
+		
+		System.out.println("게시물을 등록합니다.");
+		
+		System.out.println("게시물의 제목을 입력해주세요.");
+		String title = sc.nextLine();
+		
+		System.out.println("게시물의 내용을 입력해주세요.");
+		String content = sc.nextLine();
+		
+		int result = BoardDAO.getInstance().insertContent(title, content);
+		
+		if(result > 0) {
+			System.out.println("등록되었습니다.");
+		} else {
+			System.out.println("등록에 실패했습니다.");
+		}
+	}
+	
+	//게시물 수정 및 삭제 (본인만 가능)
+	public void updateContent() {
+		int result = 0;
+		
+		System.out.println("1. 수정   | 2. 삭제");
+		int selectNum = Integer.parseInt(sc.nextLine());
+		if(selectNum == 1) {
+			System.out.println("수정할 게시물 번호(숫자)를 입력해주세요.");
+			int updateNum = Integer.parseInt(sc.nextLine());
+		}else if(selectNum == 2) {
+			
+		}else {
+			System.out.println("메뉴를 다시 선택해주세요.");
+		}
+	}
+}

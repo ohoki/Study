@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- Java : firstName -> DB : first_name -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- Null 에 대한 처리 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+	<typeAliases>
+		<package name="com.yedam.app" />
+	</typeAliases>
+
+
+	<typeHandlers>
+		<!-- java.sql.Timestamp 를 java.util.Date 형으로 반환 -->
+		<typeHandler javaType="java.sql.Date" handler="org.apache.ibatis.type.DateTypeHandler" />
+	</typeHandlers>
+</configuration>

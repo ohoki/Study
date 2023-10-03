@@ -1,0 +1,5 @@
+package yhBank.board;
+
+public class BoardApp {
+	//고객, 관리자 화면 따로 분리
+}

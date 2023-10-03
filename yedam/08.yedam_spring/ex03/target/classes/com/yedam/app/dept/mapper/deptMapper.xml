@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.dept.mapper.DeptMapper">
+	<!-- 전체조회 -->
+	<select id="selectDeptAllList" resultType="DeptVO">
+		SELECT department_id, 
+			   department_name, 
+			   manager_id, 
+			   location_id
+		FROM departments 
+		ORDER BY department_id DESC
+	</select>
+	
+	<!-- 단건조회 -->
+	<select id="selectDeptInfo" resultType="DeptVO">
+		SELECT department_id, 
+			   department_name, 
+			   manager_id, 
+			   location_id
+		FROM departments 
+		WHERE department_id = #{departmentId}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="insertDeptInfo" parameterType="DeptVO">
+		<selectKey keyProperty="departmentId" resultType="int" order="BEFORE" >
+			SELECT NVL(MAX(department_id),0) + 10
+			FROM departments
+		</selectKey>
+		INSERT INTO departments
+				( department_id
+				  ,department_name
+				  <if test="managerId != null and managerId > 0">
+				  ,manager_id
+				  </if>
+				  <if test="locationId != null and locationId > 0">
+				  ,location_id
+				  </if>  	
+				)
+				VALUES
+				( #{departmentId}
+				  ,#{departmentName}
+				  <if test="managerId != null and managerId > 0">
+				  ,#{managerId}
+				  </if>
+				  <if test="locationId != null and locationId > 0">
+				  ,#{locationId}
+				  </if>  	
+				)
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="updateDeptInfo" parameterType="DeptVO">
+		UPDATE departments
+		<set>
+			<if test="departmentName != null and !departmentName.equals('')">
+				department_name = #{departmentName},
+			</if>
+			<if test="managerId != null and managerId > 0">
+				manager_id = #{managerId},
+			</if>
+			<if test="locationId != null and locationId > 0">
+				location_id = #{locationId},
+			</if>	
+		</set>
+		WHERE department_id = #{departmentId}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteDeptInfo" parameterType="int">
+		DELETE FROM departments
+		WHERE department_id = #{departmentId}
+	</delete>
+</mapper>

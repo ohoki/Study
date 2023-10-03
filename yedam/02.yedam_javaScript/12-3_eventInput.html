@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="input" value="yedam" id="id" name="id">
+  <button type="button" id="btn" name="btn" onclick="getInfo()">정보추출</button>
+  <br>
+  <input type="input" value="yedma2" id="id2" name="id2">
+  <button type="button" id="btn2" name="btn2" onclick="getInfo2()">정보추출2</button>
+
+  <p style="border: 1px solid red;"></p>
+
+  <script>
+    function  getInfo() {
+      let input = document.getElementById("id");
+      let str = input.value;
+      let p = document.querySelector("p");
+      p.textContent = str;
+      input.value = "";
+      input.focus();
+    }
+    function  getInfo2() {
+      let input = document.querySelectorAll("input")[1];
+      let str = input.value;
+      let p = document.querySelector("p");
+      p.textContent = str;
+    }
+
+  </script>
+</body>
+</html>

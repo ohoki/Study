@@ -1,0 +1,34 @@
+package co.micol.notice.main.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import co.micol.notice.common.Command;
+import co.micol.notice.member.service.MemberService;
+import co.micol.notice.member.service.MemberVO;
+import co.micol.notice.member.serviceImpl.MemberServiceImpl;
+
+public class MemberInsert implements Command {
+
+	@Override
+	public String exec(HttpServletRequest request, HttpServletResponse response) {
+		//회원가입을 수행한다.
+		MemberService ms = new MemberServiceImpl();
+		MemberVO vo = new MemberVO();
+		vo.setMemberId(request.getParameter("memberId"));
+		vo.setMemberPw(request.getParameter("memberPw"));
+		vo.setMemberName(request.getParameter("memberName"));
+		vo.setMemberTel(request.getParameter("memberTel"));
+		vo.setMemberAge(Integer.valueOf(request.getParameter("memberAge")));
+		vo.setMemberGender(request.getParameter("memberGender"));
+		
+		int result = ms.memberInsert(vo);
+		if(result != 0) {
+			System.out.println("정상 등록 되었습니다.");
+		}else {
+			System.out.println("회원가입 실패 ㅠㅠ");
+		}
+		return null;
+	}
+
+}

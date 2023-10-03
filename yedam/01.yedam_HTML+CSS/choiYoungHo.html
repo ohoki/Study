@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>최영호</title>
+  <link rel="stylesheet" href="css/choiYoungHo.css">
+</head>
+
+<body>
+  <div id="container">
+    <!-- 헤더 -->
+    <header>
+      <h1>최영호 페이지에 온 것을 환영합니다.</h1>
+      <nav>
+        <ul>
+          <li><a href="#">메인메뉴</a></li>
+          <li><a href="#">메인메뉴</a></li>
+          <li><a href="#">메인메뉴</a></li>
+          <li class="f_right"><a href="#">공지사항</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- 좌측 사이드 -->
+    <aside>
+      <h2>좌측 사이드</h2>
+      <p>p1</p>
+      <p>p2</p>
+      <p>p3</p>
+      <p>p4</p>
+      <p>p5</p>
+    </aside>
+    <!-- 섹션 -->
+    <section>
+      <h2>회원가입 영역입니다.</h2>
+      <form action="join.jsp" method="post" name="join">
+        <fieldset>
+          <legend>개인정보 등록</legend>
+          <ul>
+            <li>
+              <label for="u_id">계정아이디</label>
+              <input type="text" name="u_id" id="u_id" autofocus>
+            </li>
+            <li>
+              <label for="u_pw">비밀번호</label>
+              <input type="password" name="u_pw" id="u_pw">
+            </li>
+            <li>
+              <label for="u_pwc">비밀번호 확인</label>
+              <input type="password" name="u_pwc" id="u_pwc">
+            </li>
+            <li>
+              <label for="u_name">이름</label>
+              <input type="text" name="u_name" id="u_name" placeholder="5자 미만 공백없이">
+            </li>
+            <li>
+              <label for="u_tel">전화번호</label>
+              <input type="text" name="u_tel" id="u_tel">
+            </li>
+          </ul>
+        </fieldset>
+        <fieldset>
+          <input type="submit" value="회원 가입" class="btn" disabled>
+          <input type="reset" value="정보 수정" class="btn" disabled>
+        </fieldset>
+      </form>
+    </section>
+    <!-- 우측 사이드 -->
+    <aside>
+      <h2>우측 사이드</h2>
+    </aside>
+    <!-- 푸터 -->
+    <footer>
+      <h2>푸터영역 입니다</h2>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+package yhBank.board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import yhBank.account.Account;
+import yhBank.common.DAO;
+import yhBank.member.MemberService;
+
+public class BoardDAO  extends DAO{
+	//싱 글 톤
+	private static BoardDAO bdDao = null;
+	
+	private BoardDAO() {}
+	
+	public static BoardDAO getInstance() {
+		if(bdDao == null) {
+			bdDao = new BoardDAO();
+		}
+		return bdDao;
+	}
+	//전체 게시물 보기
+	public List<Board> boardList() {
+		List<Board> list = new ArrayList<>();
+		Board board = null;
+		
+		try {
+			conn();
+			String sql = "SELECT * FROM board";
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				board = new Board();
+				board.setBoardNum(rs.getInt("board_num"));
+				board.setMemberId(rs.getString("member_id"));
+				board.setBoardTitle(rs.getString("board_title"));
+				board.setBoardContent(rs.getString("board_content"));
+				board.setBoardDate(rs.getDate("board_date"));
+				list.add(board);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return list;
+	}
+	
+	//게시물 찾기
+		public Board checkBoard(int boardNum) {
+			Board board = null;
+			
+			try {
+				conn();
+				String sql = "SELECT * FROM board WHERE board_num = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, boardNum);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					board = new Board();
+					board.setBoardNum(rs.getInt("board_num"));
+					board.setMemberId(rs.getString("member_id"));
+					board.setBoardTitle(rs.getString("board_title"));
+					board.setBoardContent(rs.getString("board_content"));
+					board.setBoardDate(rs.getDate("board_date"));
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				disconn();
+			}
+			return board;
+		}
+	
+	//게시물 등록
+	public int insertContent(String title, String content) {
+		int result = 0;
+		
+		try {
+			conn();
+			
+			String sql = "INSERT INTO board VALUES((SELECT COUNT(*)+1 FROM board),?,?,?,sysdate)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, MemberService.memberInfo.getMemberId());
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//게시물 수정
+	public int updateContent() {
+		int result = 0;
+		
+		try {
+			conn();
+			
+			String sql = "UPDATE ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, MemberService.memberInfo.getMemberId());
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+	//게시물 삭제
+	public int insertContent(String title, String content) {
+		int result = 0;
+		
+		try {
+			conn();
+			
+			String sql = "INSERT INTO board VALUES((SELECT COUNT(*)+1 FROM board),?,?,?,sysdate)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, MemberService.memberInfo.getMemberId());
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+}

@@ -1,0 +1,28 @@
+
+public class test {
+	public static void main(String[] args) {
+		int answer = 0;
+        String even = "";
+        String odd = "";
+        int[] num_list = {3, 4, 5, 2, 1};
+        
+        for(int i=0; i<num_list.length; i++) {
+            if(num_list[i]%2 == 0) {
+            	System.out.println(num_list[1]);
+                even += String.valueOf(num_list[i]);
+                System.out.println(even);
+            } else {
+                odd += String.valueOf(num_list[i]);
+            }
+            
+            
+            System.out.println(even);
+            System.out.println(odd);
+            
+            answer = Integer.parseInt(odd) + Integer.parseInt(even);
+            
+           
+            
+        }
+	}
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** ================================== 객체 =============================================
+     * ex) 컴퓨터 -> 정보(색상, 금액, 부품....)
+     *            -> 기능(웹서핑, 코딩, 게임, 쇼핑....)
+     * object -> 속성(정보), 메소드(기능)
+     **/
+
+    let product = {
+      name : "mango",
+      kind : "fruit",
+      color: "yellow",
+      info : function() {
+        return `name : ${this.name}, kind : ${this.kind}, color : ${this.color}`;
+        // allow함수에서의 this는 window를 가르킨다.
+        // 메소드 안에서 함수를 생성할 때의 this는 window를 가르킨다.
+      }
+    };
+
+    console.log(product.name);
+    console.log(product.info());
+
+    //동적 객체 속성 생성
+    let student = {};
+
+    student.name = "ddochi";
+    student.age = 20;
+    student.future = "developer";
+
+    console.log( JSON.stringify(student, null, 2) );
+    //클라이언트와 서버 사이에서 데이터 교류 타입 --> 문자열, 배열, JSON
+
+    //삭제
+    delete student.future;
+    console.log( JSON.stringify(student, null, 2) );
+  </script>
+</body>
+</html>

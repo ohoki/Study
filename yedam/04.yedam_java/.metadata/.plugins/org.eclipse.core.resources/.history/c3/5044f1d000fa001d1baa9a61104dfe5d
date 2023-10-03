@@ -1,0 +1,15 @@
+package yhBank.board;
+
+public class BoardApp {
+	//고객, 관리자 화면 따로 분리
+	public static BoardApp() {
+		start();
+	}
+
+	private static void start() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

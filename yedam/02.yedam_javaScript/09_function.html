@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** =============================== 함수 ===========================================
+     *  function 함수명(매개변수) { 실행할 내용; }
+     **/ 
+    function myFnc() {
+      alert("함수생성");
+    }
+    myFnc(); //함수 호출
+
+    //------------- 예제 --------------------------------------------------------------------
+    let count = 0;
+    
+    myFnc2(); //hello1
+
+    function myFnc2() {
+      count++;
+      document.write("hello"+count, "<br>")
+    }
+
+    myFnc2(); //hello2
+    // 호이스팅 --> 렌더링 과정에서 미리 window 변수에 함수가 저장이 됨 --> 그래서 함수 선언문 위에서 함수를 호출할 수 있게 된다. 
+    console.log(this.window);
+
+    //
+    let theFnc = function() {
+      count++;
+      document.write("bye"+count, "<br>");
+    }
+    theFnc(); //함수 실행
+
+    //================================ 매개변수가 있는 함수 =================================================
+    function myAddr(name, area) {
+      document.write("안녕하세요. "+ name + "입니다.", "<br>");
+      document.write("사는 곳은 "+ area + "입니다.", "<br><br>");
+    }
+
+    myAddr("홍당무",  "서울");
+    myAddr("감자", "원주");
+    myAddr(1, 2);
+
+    //ID, PW
+    let id = "korea";
+    let pw = "1234";
+
+    function login(uid, upw) {
+      if(uid == id) {
+        if(upw == pw) {
+          document.write(uid + "님 방문을 환영합니다.");
+        } else {
+          document.write("잘못된 비밀번호 입니다.");
+        }
+      } else {
+        alert("존재하지 않는 아이디 입니다.");
+      }
+    }
+
+    let userId = prompt("아이디를 입력하세요.");
+    let userPw = prompt("비밀번호를 입력하세요.");
+
+    login(userId, userPw);
+
+    //================================ 리턴 함수 =================================================
+    function f(x) {
+      return x*x;
+    }
+    console.log(f(3)); // 9
+
+    function isLeapYear(year) {
+      if(year%4 === 0 && year%100 !== 0 || year%400 === 0) {
+        return true;
+      } else {
+        return false;
+      }
+      // 위와 같은 기능의 구문 --> return (year%4 === 0) && (year%100 !== 0) || (year%400 === 0);
+      //                         return (year%4 === 0) && (year%100 !== 0) || (year%400 === 0) ? true : false;
+    }
+
+    console.log(`2020년도는 ${isLeapYear(2020)}`); //``(백틱) -리터럴 내용을 그대로 반영 시키는 방법
+    console.log(isLeapYear(2010));
+    console.log(isLeapYear(2000));
+
+    //--------------------------------- 예제 ------------------------------------------------------------
+    function sumAll(a,b) {
+      let output = 0;
+      for(let i = a; i<b; i++) {
+        output += i;
+      }
+      return output;
+    }
+
+    let result = sumAll(1,100);
+    console.log(`1부터 100까지의 합 : ${result}`);
+    result = sumAll(1,500);
+    console.log(`1부터 500까지의 합 : ${result}`);
+
+    //============================= 문제 ===================================================================
+    let arr = [ 22,111,66,77,9,2,10,11 ];
+      //최소값 구하기
+    function min(array) {
+      let minNumber = array[0];
+      for(let i =0; i<array.length; i++) {
+        if(minNumber > array[i]) {
+          minNumber = array[i];
+        }
+      }
+      return minNumber;
+    }
+
+    console.log(`${arr} 중에서 최솟값은 = ${min(arr)}`);
+    //-------------------
+    let arrSubject = [ "국어","수학", "영어" ];
+
+  function sumScore(arrData) {
+    let sum = 0;
+    for(let i=0; i<arrData.length; i++) {
+      sum += Number(prompt(`${arrData[i]} 점수는 ?`));
+    }
+    let avg = sum/arrData.length;
+    return avg;
+  }
+
+  document.write(`<br>평균 점수는 ${sumScore(arrSubject)}점 입니다.`);
+
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+package yhBank.account;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import yhBank.common.DAO;
+
+public class AccountDAO extends DAO{
+	//싱 글 톤
+	private static AccountDAO acDao = null;
+	
+	private AccountDAO() {}
+	
+	public static AccountDAO getInstance() {
+		if(acDao == null) {
+			acDao = new AccountDAO();
+		}
+		return acDao;
+	}
+	
+	//계좌 개설
+	public int insertAccount(Account account) {
+		int result = 0;
+		
+		try {
+			conn();
+			
+			String sql = "INSERT INTO account VALUES(?,?,SYSDATE,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, account.getMemberId());
+			pstmt.setString(2, account.getAccountNumber());
+			pstmt.setInt(3, account.getAccountBalance());
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//계좌 해지
+	public int deleteAccount(Account account) {
+		int result = 0;
+		
+		try {
+			conn();
+			
+			String sql = "DELETE account WHERE member_id = ? AND account_number = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, account.getMemberId());
+			pstmt.setString(2, account.getAccountNumber());
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//계좌 조회 (관리자용)
+	public List<Account> checkAllAccount() {
+		List<Account> list = new ArrayList<Account>();
+		Account account = null;
+		
+		try {
+			conn();
+			String sql = "SELECT * FROM account";
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				account = new Account();
+				account.setMemberId(rs.getString("member_id"));
+				account.setAccountNumber(rs.getString("account_number"));
+				account.setAccountCDate(rs.getDate("account_c_date"));
+				account.setAccountBalance(rs.getInt("account_balance"));
+				list.add(account);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return list;
+	}
+	
+	//계좌 조회 (회원용)
+	public List<Account> checkMemberAccount(String id) {
+		List<Account> list = new ArrayList<Account>();
+		Account account = null;
+		
+		try {
+			conn();
+			String sql = "SELECT * FROM account WHERE member_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				account = new Account();
+				account.setMemberId(rs.getString("member_id"));
+				account.setAccountNumber(rs.getString("account_number"));
+				account.setAccountCDate(rs.getDate("account_c_date"));
+				account.setAccountBalance(rs.getInt("account_balance"));
+				list.add(account);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return list;
+	}
+	
+	//계좌 이체
+	public int transferMoney(String fromAccount, String toAccount, int balance) {
+		int result = 0;
+		
+		try {
+			conn();
+			String sql = "SELECT * FROM account WHERE account_number = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, fromAccount);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getInt("account_balance") >= balance) {
+					String sql2 = "UPDATE account SET account_balance = account_balance - ? WHERE account_number = ?";
+					pstmt = conn.prepareStatement(sql2);
+					pstmt.setInt(1, balance);
+					pstmt.setString(2, fromAccount);
+					
+					result = pstmt.executeUpdate();
+				} else {
+					System.out.println("잔액이 부족합니다.");
+				}
+			}
+			if(result == 1) {
+				String sql2 = "UPDATE account SET account_balance = account_balance + ? WHERE account_number = ?";
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setInt(1, balance);
+				pstmt.setString(2, toAccount);
+				
+				result = pstmt.executeUpdate();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//입출금
+	public int inoutMoney(String accountNumber, int balance, int selectNum) {
+		int result = 0;
+		
+		try {
+			conn();
+			if(selectNum == 1) {
+				String sql = "UPDATE account SET account_balabce = account_balabce - ? WHERE account_number = ?";
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, balance);
+				pstmt.setString(2, accountNumber);
+			} else if(selectNum == 2) {
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+}

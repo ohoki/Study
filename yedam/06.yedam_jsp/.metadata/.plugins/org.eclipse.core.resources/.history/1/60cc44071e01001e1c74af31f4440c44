@@ -1,0 +1,17 @@
+package co.micol.notice.member.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import co.micol.notice.common.Command;
+
+public class MemberList implements Command {
+
+	@Override
+	public String exec(HttpServletRequest request, HttpServletResponse response) {
+		//Member List
+		MeberService ms = new MemberServiceImple();
+		return null;
+	}
+
+}

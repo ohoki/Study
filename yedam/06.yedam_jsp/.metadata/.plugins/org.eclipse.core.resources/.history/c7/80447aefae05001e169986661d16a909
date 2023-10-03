@@ -1,0 +1,17 @@
+package co.youngho.prj.controller;
+
+import java.util.HashMap;
+
+import javax.servlet.annotation.WebServlet;
+
+import co.youngho.prj.common.Command;
+
+@WebServlet("*.do")
+public class FrontController {
+	private static final long serialVersionUID = 1L;
+	private HashMap<String, Command> map = new HashMap<String, Command>();
+	
+	public FrontController() {
+		super();
+	}
+}

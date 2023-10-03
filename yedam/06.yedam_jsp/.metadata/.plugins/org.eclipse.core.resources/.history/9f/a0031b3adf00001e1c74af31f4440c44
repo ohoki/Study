@@ -1,0 +1,14 @@
+package co.micol.notice.common;
+
+public class DataSource {
+	private static DataSource dataSource;
+	
+	private DataSource() {}
+	
+	public DataSource getInstance() {
+		if(dataSource == null) {
+			dataSource = new DataSource();
+		}
+		return dataSource;
+	}
+}

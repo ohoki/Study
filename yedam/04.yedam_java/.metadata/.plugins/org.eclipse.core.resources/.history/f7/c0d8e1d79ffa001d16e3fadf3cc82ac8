@@ -1,0 +1,9 @@
+package yhBank.transaction;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TransactionService {
+	List<Transaction> list = TransactionDAO.getInstance().lastMonthVolum();
+	
+}

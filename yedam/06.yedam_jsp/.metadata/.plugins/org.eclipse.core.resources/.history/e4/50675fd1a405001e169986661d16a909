@@ -1,0 +1,42 @@
+package co.micol.notice.product.command;
+
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import co.micol.notice.common.Command;
+
+public class ProductInsert implements Command {
+
+	@Override
+	public String exec(HttpServletRequest request, HttpServletResponse response) {
+		//제품 등록 처리 및 파일 업로드
+		String path = request.getContextPath();
+		String saveDir = path + File.separator +  "upload" + File.separator;
+		int maxSize = 100 * 1024 *  1024;
+		
+		try {
+			MultipartRequest multi = new MultipartRequest(
+											request, 
+											saveDir, 
+											maxSize, 
+											"utf-8", 
+											new DefaultFileRenamePolicy());
+			
+			String pfile = multi.getFilesystemName("pfile");
+			String ofile = multi.getOriginalFileName("pfile");
+			System.out.println(pfile);
+			System.out.println(ofile);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

@@ -1,0 +1,18 @@
+package co.micol.notice.common;
+
+public class DataSource {
+	private static DataSource dataSource;
+	private String driver;
+	private String url;
+	pirvate String user;
+	pirvate String password;
+	
+	private DataSource() {}
+	
+	public DataSource getInstance() {
+		if(dataSource == null) {
+			dataSource = new DataSource();
+		}
+		return dataSource;
+	}
+}

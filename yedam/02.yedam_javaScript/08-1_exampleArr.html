@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //로또 찾기 ( 6개의 랜덤 값 / 중복 X / 1~45 )
+
+
+    
+    
+    let money = Number(prompt("돈을 입력하세요.")); //1000원에 한 줄
+    for(let k=0; k<money/1000; k++) {
+      let arr = [];
+      for(let i =0; i<6; i++) {
+        let num = parseInt(Math.random()*45)+1;
+        arr.push(num);
+        for(let j=0; j<i; j++) {
+          if(arr[i] == arr[j]) { 
+            arr.splice(i, 1);
+            i--;
+          }
+        }
+      }
+      console.log(arr);
+    }
+  </script>
+</body>
+</html>

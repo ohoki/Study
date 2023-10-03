@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.yedam.exception.Exception&apos; to &apos;ExceptionExample&apos;&#x0D;&#x0A;- Original project: &apos;chap10&apos;&#x0D;&#x0A;- Original element: &apos;com.yedam.exception.Exception&apos;&#x0D;&#x0A;- Renamed element: &apos;com.yedam.exception.ExceptionExample&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Exception&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.yedam.exception{Exception.java[Exception" matchStrategy="1" name="ExceptionExample" qualified="false" references="true" similarDeclarations="false" stamp="1684136539723" textual="false" version="1.0"/>
+</session>

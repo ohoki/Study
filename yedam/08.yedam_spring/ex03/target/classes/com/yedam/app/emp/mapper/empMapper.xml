@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.emp.mapper.EmpMapper">
+	<!-- 전체조회 -->
+	<select id="selectEmpAllList" resultType="EmpVO">
+		SELECT employee_id, 
+			   first_name, 
+			   last_name, 
+			   email, 
+			   phone_number, 
+			   hire_date, 
+			   job_id, 
+			   salary, 
+			   commission_pct, 
+			   manager_id, 
+			   department_id 
+		FROM employees 
+		ORDER BY employee_id DESC
+	</select>
+	
+	<!-- 단건조회 -->
+	<select id="selectEmpInfo" resultType="EmpVO">
+		SELECT employee_id, 
+			   first_name, 
+			   last_name, 
+			   email, 
+			   phone_number, 
+			   hire_date, 
+			   job_id, 
+			   salary, 
+			   commission_pct, 
+			   manager_id, 
+			   department_id 
+		FROM employees 
+		WHERE employee_id = #{employeeId}
+		<!-- #{} : PreparedStatement 0 -> 0, Kang -> 'Kang' -->
+		<!-- ${} : Statement         0 -> 0, Kang ->  Kang  -->
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="insertEmpInfo" parameterType="EmpVO">
+		<selectKey keyProperty="employeeId" resultType="int" order="BEFORE" >
+			SELECT NVL(MAX(employee_id),0) + 1
+			FROM employees
+		</selectKey>
+		INSERT INTO employees
+				( employee_id,
+				  first_name,
+				  last_name,
+				  email,
+				  hire_date,
+				  job_id,
+				  salary  	
+				)
+				VALUES
+				( #{employeeId},
+				  #{firstName},
+				  #{lastName},
+				  #{email},
+				  <if test="hireDate != null">
+				  	#{hireDate},
+				  </if>
+				  <if test="hireDate == null">
+				  	sysdate,
+				  </if>
+				  #{jobId},
+				  #{salary}
+				)
+	</insert>
+	
+	<!-- 수정 : 사원의 급여를 정해진 비율로 인상 -->
+	<update id="updateEmpSal">
+		UPDATE employees
+		SET salary = salary * (1 + #{raise} / 100)
+		WHERE employee_id = #{emp.employeeId}
+	</update>
+
+	<!-- 수정 : 사원 정보 수정 -->
+	<!-- 1) 모든 항목에 업데이트 진행, 전제조건 : 모든 항목에 정보가 존재 -->
+	<!-- 2) Mybatis -> Dynamic SQL 사용 -->
+	<update id="updateEmpInfo" parameterType="EmpVO">
+		UPDATE employees
+		<set>
+			<if test="firstName != null and !firstName.equals('')">
+				first_name = #{firstName},
+			</if>
+			<if test="lastName != null and !lastName.equals('')">
+				last_name = #{lastName},
+			</if>
+			<if test="email != null and !email.equals('')">
+				email = #{email},
+			</if>
+			<if test="salary > 0">
+				salary = #{salary},
+			</if>	
+		</set>
+		<!-- set과 if가 합쳐지면 , 를 동적으로 처리해준다 -->
+		WHERE employee_id = #{employeeId}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteEmpInfo" parameterType="int">
+		DELETE FROM employees
+		WHERE employee_id = #{employeeId}
+	</delete>
+</mapper>

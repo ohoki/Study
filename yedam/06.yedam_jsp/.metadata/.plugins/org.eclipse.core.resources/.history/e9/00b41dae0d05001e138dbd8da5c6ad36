@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<jsp:include page="../menu/menu.jsp"></jsp:include>
+	<div align="center">
+		<h1>Welcome to My home</h1>
+	</div>
+	<div>
+		<img alt="배경화면" src="img/이주빈 화보.jpg" width="800" textalign="center">
+	</div>
+</body>
+</html>

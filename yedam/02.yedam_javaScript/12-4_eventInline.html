@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <form id="form" action="12-3_eventInput.html"> -->
+  <form id="form" action="12-3_eventInput.html" onsubmit="return fnSubmit()">
+    <label for="userId">이름 <input type="text" id="userId" name="userId"></label>
+    <button>확인</button>
+  </form>
+  <script>
+    //input태그에 데이터가 있는지 없는지 확인하고 데이터가 있으면 페이지 이동, 없으면 페이지 이동 X
+    function fnSubmit() {
+      alert("submit");
+      let txt = document.getElementById("userId");
+      if(txt.value == "") {
+        console.log("no data");
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    let form = document.getElementById("form");
+    form.onsubmit = function() {
+      let txt = document.getElementById("userId");
+      if(txt.value == "") {
+        console.log("no data");
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+  
+  <a href="https://www.naver.com" id="abtn">naver</a>
+  <a href="https://www.naver.com" id="abtn" onclick="fnA()">naver2</a>
+  <a href="https://www.naver.com" id="abtn" onclick="
+    if(!confirm('이동?')) {
+        event.preventDefault();
+      } 
+      ">naver3</a>
+  <button type="button" id="btn">button</button>
+
+  <script>
+    let aTag = document.getElementById("abtn");
+    //태그에 간접적으로 부여
+    aTag.onclick = function() {
+      if(!confirm("이동?")) {
+        event.preventDefault(); //이벤트 중지
+      }
+    }
+    //태그에 직접 부여
+    function fnA() {
+      if(!confirm("이동?")) {
+        event.preventDefault(); //이벤트 중지
+      }
+    }
+
+
+  </script>
+</body>
+</html>

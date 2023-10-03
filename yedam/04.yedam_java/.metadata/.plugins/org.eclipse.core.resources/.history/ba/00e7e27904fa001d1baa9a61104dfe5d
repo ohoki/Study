@@ -1,0 +1,50 @@
+package yhBank.board;
+
+import java.util.Scanner;
+
+public class BoardService {
+	Scanner sc = new Scanner(System.in);
+	//계좌 개설
+		public void insertAccount() {
+			Account account = new Account();
+			
+			System.out.println("계좌개설을 시작합니다.");
+			
+			while(true) {
+				if(MemberService.memberInfo.getMemberAuth().equals("A")) {
+					System.out.println("계좌를 개설할 ID를 입력해주세요.");
+					String id = sc.nextLine();
+					
+					Member confirmMember = MemberDAO.getInstance().selectMember(id);
+					if(confirmMember != null) {
+						account.setMemberId(id);
+						break;
+					} else {
+						System.out.println("없는 ID입니다.");
+					}
+				} else{
+					account.setMemberId(MemberService.memberInfo.getMemberId());
+					break;
+				}
+			}
+			String accountNumber = makeAccountNumber(); 
+			account.setAccountNumber(accountNumber);
+			
+			while(true) {
+				try {
+					System.out.println("초기금액을 입금하세요>");
+					account.setAccountBalance(Integer.parseInt(sc.nextLine()));
+					break;
+				}catch(NullPointerException e){
+					System.out.println("숫자만 입력해주세요.");
+				}
+			}
+			int result = AccountDAO.getInstance().insertAccount(account);
+			
+			if(result > 0) {
+				System.out.println(account.getMemberId() + "님의 새로운 계좌(" + account.getAccountNumber()+")가 개설되었습니다.");
+			} else {
+				System.out.println("게좌 개설에 실패하였습니다.");
+			}
+		}
+}

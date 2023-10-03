@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.notice.product.service.ProductMapper">
+	<select id="productSelectList" resultType="co.micol.notice.product.service.ProductVO">
+		SELECT * FROM product
+	</select>
+	<select id="productSelect" resultType="co.micol.notice.product.service.ProductVO">
+		SELECT * FROM product WHERE proudct_id = #{productId}
+	</select>
+	<insert id="productInsert"></insert>
+	<update id="productUpdate"></update>
+	<delete id="productDelete"></delete>
+</mapper>

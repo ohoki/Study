@@ -1,0 +1,23 @@
+package yhBank.transaction;
+
+import java.util.List;
+
+public class TransactionService {
+	//최근 한달 간 거래금액
+	public void lastMonthVolum() {
+		System.out.println("===회원 별 최근 한달 간 거래금액 (계좌 통합)===");
+		List<Transaction> list = TransactionDAO.getInstance().lastMonthVolum();
+		
+		for(int i=0; i<list.size(); i++) {
+			String auth = "";
+			if(list.get(i).getMemberAuth().equals("N")) {
+				auth = "일반 회원";
+			}else if(list.get(i).getMemberAuth().equals("V")) {
+				auth = "특별 회원";
+			}else if(list.get(i).getMemberAuth().equals("A")) {
+				auth = "관리자";
+			}
+			System.out.println(list.get(i).getMemberId() + "님(" + auth + ") : " + list.get(i).getTransactionVolum() + "원");
+		}
+	}
+}

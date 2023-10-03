@@ -1,0 +1,41 @@
+package yhBank.board;
+
+import yhBank.account.Account;
+import yhBank.common.DAO;
+import yhBank.member.MemberService;
+
+public class BoardDAO  extends DAO{
+	//싱 글 톤
+	private static BoardDAO bdDao = null;
+	
+	private BoardDAO() {}
+	
+	public static BoardDAO getInstance() {
+		if(bdDao == null) {
+			bdDao = new BoardDAO();
+		}
+		return bdDao;
+	}
+	
+	//게시판 등록
+	public int insertContent(String title, String content) {
+		int result = 0;
+		
+		try {
+			conn();
+			
+			String sql = "INSERT INTO board VALUES((SELECT COUNT(*)+1 FROM board),?,?,?,sysdate)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, MemberService.memberInfo.getMemberId());
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+}

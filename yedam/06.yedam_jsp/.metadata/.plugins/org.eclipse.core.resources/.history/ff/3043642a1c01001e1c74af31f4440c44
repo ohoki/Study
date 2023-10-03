@@ -1,0 +1,5 @@
+package co.micol.notice.member.service;
+
+public class MemberMapper {
+
+}

@@ -1,0 +1,16 @@
+package yhBank.board;
+
+import java.sql.Date;
+
+public class Board {
+//	BOARD_NUM     NOT NULL NUMBER         
+//	MEMBER_ID     NOT NULL VARCHAR2(20)   
+//	BOARD_TITLE   NOT NULL VARCHAR2(200)  
+//	BOARD_CONTENT NOT NULL VARCHAR2(1000) 
+//	BOARD_DATE             DATE    
+	private int boardNum;
+	private String memberId;
+	private String boardTitle;
+	private String boardContent;
+	private Date boardDate;
+}

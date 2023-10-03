@@ -1,0 +1,13 @@
+package yhBank.transaction;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TransactionService {
+	List<Transaction> list = TransactionDAO.getInstance().lastMonthVolum();
+	
+	for(int i=0; i<list.size; i++) {
+		System.out.println(list.get(i).getMemberId() + "님의 최근 한달 거래량(계좌 통합) : " + list.get(i).getTransactionVolum());
+	}
+	
+}

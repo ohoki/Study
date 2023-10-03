@@ -1,0 +1,20 @@
+package co.micol.notice.product.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import co.micol.notice.common.Command;
+import co.micol.notice.product.service.ProductService;
+import co.micol.notice.product.service.ProductVO;
+import co.micol.notice.product.serviceImpl.ProductServiceImpl;
+
+public class ProductInsert implements Command {
+
+	@Override
+	public String exec(HttpServletRequest request, HttpServletResponse response) {
+		//제품 등록 처리 및 파일 업로드
+		String saveDir = "upload/";
+		return null;
+	}
+
+}

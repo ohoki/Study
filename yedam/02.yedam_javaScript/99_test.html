@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="myDiv">
+    텍스트 테스트
+    <span style="display: none;">숨겨진 텍스트</span>
+
+    <input type="button" value="innerHTML" onclick="getInnerHTML()">
+    <input type="button" value="innerText" onclick="getInnerText()">
+    <input type="button" value="textContent" onclick="getTextContent()">
+
+    <script>
+      function getInnerHTML() {
+        let el = document.getElementById("myDiv");
+        alert(el.innerHTML);
+      }
+
+      function getInnerText() {
+        let el = document.getElementById("myDiv");
+        alert(el.innerText);
+      }
+
+      function getTextContent() {
+        let el = document.getElementById("myDiv");
+        alert(el.textContent);
+      }
+    </script>
+  </div>
+</body>
+</html>

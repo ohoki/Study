@@ -1,0 +1,54 @@
+package yhBank.transaction;
+
+import java.sql.Date;
+
+public class Transaction {
+//	ACCOUNT_NUMBER     NOT NULL VARCHAR2(100) 
+//	TRANSACTION_DATE            DATE          
+//	TRANSACTION_AMOUNT          NUMBER        
+//	TRANSACTION_STATUS          VARCHAR2(20)  
+//	TRANSCATION_VOLUM           NUMBER
+	private String accountNumber;
+	private Date transcationDate;
+	private int transactionAmount;
+	private String transactionStatus;
+	private int transactionVolum;
+	private String memberId;
+	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	public Date getTranscationDate() {
+		return transcationDate;
+	}
+	public void setTranscationDate(Date transcationDate) {
+		this.transcationDate = transcationDate;
+	}
+	public int getTransactionAmount() {
+		return transactionAmount;
+	}
+	public void setTransactionAmount(int transactionAmount) {
+		this.transactionAmount = transactionAmount;
+	}
+	public String getTransactionStatus() {
+		return transactionStatus;
+	}
+	public void setTransactionStatus(String transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+	public int getTransactionVolum() {
+		return transactionVolum;
+	}
+	public void setTransactionVolum(int transactionVolum) {
+		this.transactionVolum = transactionVolum;
+	}
+}

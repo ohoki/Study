@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<security:http pattern="/css/**" security="none" />
+	
+	<security:http>
+		<security:intercept-url pattern="/top.jsp" access="permitAll()" />
+		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		<security:form-login default-target-url="/top.jsp" />
+		<security:logout logout-url="/logout" logout-success-url="/top.jsp" />
+		<security:csrf disabled="false" />
+	</security:http>
+	
+	<bean id="userDetailsService" class="com.yedam.web.user.service.impl.CustomUserDetailsService"></bean>
+	
+	<!-- {noop} 강제로 암호화 요구를 제거함 (개발환경에서만 사용!!) -->
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userDetailsService">
+			<!-- <security:user-service>
+				<security:user name="user" password="{noop}1234" authorities="ROLE_USER" />
+				<security:user name="admin" password="{noop}1234" authorities="ROLE_ADMIN" />
+			</security:user-service> -->
+			
+			<!-- <security:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select LOGIN_ID, '{noop}' || PASSWORD, 1
+			 							 from T_USER
+										 where LOGIN_ID = ?"
+				authorities-by-username-query="select LOGIN_ID, ROLE_NAME
+			 								   from T_ROLE
+			 								   inner join T_USER_ROLE on T_ROLE.ID = T_USER_ROLE.ROLE_ID
+			  								   inner join T_USER on T_USER_ROLE.USER_ID = T_USER.ID
+			 								   where LOGIN_ID = ?" 
+			/> -->
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>

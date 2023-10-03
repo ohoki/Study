@@ -1,0 +1,93 @@
+package yhBank.transaction;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import yhBank.common.DAO;
+
+public class TransactionDAO extends DAO{
+	//싱 글 톤
+	private static TransactionDAO taDAO = null;
+	
+	private TransactionDAO() {}
+	
+	public static TransactionDAO getInstance() {
+		if(taDAO == null) {
+			taDAO = new TransactionDAO();
+		}
+		return taDAO;
+	}
+	
+	//거래장부 입금 거래 내역 추가 함수
+	public void deposit(String accountNumber, int amount) {
+		try {
+			conn();
+			String sql = "INSERT INTO transaction VALUES(?,SYSDATE,?,'입금')";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, accountNumber);
+			pstmt.setInt(2, amount);
+			pstmt.execute();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+	}
+	
+	//거래장부 출금 거래 내역 추가 함수
+	public void withdrawal(String accountNumber, int amount) {
+		try {
+			conn();
+			String sql = "INSERT INTO transaction VALUES(?,SYSDATE,?,'출금')";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, accountNumber);
+			pstmt.setInt(2, amount);
+			pstmt.execute();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+	}
+	
+	//최근 한달 간 거래금액
+	public List<Transaction> lastMonthVolum() {
+		List<Transaction> list = new ArrayList<>();
+		Transaction transaction = null;
+		try {
+			conn();
+			String sql = "SELECT a.member_id, SUM(t.transaction_amount) volum, m.member_auth "
+					   + "FROM account a LEFT JOIN transaction t ON (a.account_number = t.account_number) JOIN member m ON(a.member_id = m.member_id) "
+					   + "WHERE t.transaction_date BETWEEN ADD_MONTHS(SYSDATE,-1)AND SYSDATE GROUP BY a.member_id, m.member_auth";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				transaction = new Transaction();
+				transaction.setMemberId(rs.getString("member_id"));
+				transaction.setTransactionVolum(rs.getInt("volum"));
+				transaction.setMemberAuth(rs.getString("member_auth"));
+				list.add(transaction);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return list;
+	}
+	
+	//등급 갱신
+	public int updateAuth(boolean upDown) {
+		int result = 0;
+		try {
+			conn();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+}

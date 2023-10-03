@@ -1,0 +1,15 @@
+package yhBank.board;
+
+public class BoardDAO {
+	//싱 글 톤
+	private static BoardDAO bdDao = null;
+	
+	private BoardDAO() {}
+	
+	public static BoardDAO getInstance() {
+		if(bdDao == null) {
+			bdDao = new BoardDAO();
+		}
+		return bdDao;
+	}
+}

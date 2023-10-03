@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2단 레이아웃</title>
+  <style>
+    #container {
+      border: 1px solid #999;
+      width: 960px;
+      padding: 20px;
+      margin: auto;
+    }
+    header {
+      border: 1px solid #999;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    section {
+      border: 1px solid #999;
+      width: 620px;
+      padding: 20px;
+      float: left;
+      margin-bottom: 20px;
+    }
+    aside {
+      border: 1px solid #999;
+      width: 220px;
+      padding: 20px;
+      float: right;
+      margin-bottom: 20px;
+      background-color: #e0e0ba;
+    }
+    footer {
+      clear: both;
+      border: 1px solid #999;
+      padding: 10px;
+    }
+    .bluetxt {
+      color: blue;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- HEADER -->
+    <header>
+      <p class="bluetxt">
+        -container : 테투리 1px, 너비 960px, 안여백 20px, 화면 중앙에 위치 <br>
+        -header : 테투리 1px, 안여백 10px, 아래 요소와 간격 20px
+      </p>
+      <h1>사이트 제목</h1>
+    </header>
+    <!-- SECTION -->
+    <section>
+      <h2>본문</h2>
+      <p>내용 입력1</p>
+      <p>내용 입력2</p>
+      <p class="bluetxt">
+        테투리 1px, 너비 620px, <br>
+        안여백 20px, 왼쪽으로 플로팅, <br>
+        아래요소와 간격 20px
+      </p>
+    </section>
+    <!-- ASIDE -->
+    <aside>
+      <h2>사이드 바</h2>
+      <p>광고1</p>
+      <p>광고2</p>
+      <p class="bluetxt">
+        테투리 1px, 너비 220px, 안여백 20px, 
+        오른쪽으로 플로팅, 아래요소와 간격 20px, 배경색
+      </p>
+    </aside>
+    <!-- FOOTER -->
+    <footer>
+      <h2>푸터</h2>
+      <p>저작권 정보, 연락처 등</p>
+      <p class="bluetxt">테투리 1px, 양쪽 플로팅 해제, 안여백 10px</p>
+    </footer>
+  </div>
+</body>
+</html>

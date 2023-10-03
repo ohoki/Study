@@ -1,0 +1,38 @@
+package yhBank.board;
+
+import java.util.Scanner;
+
+public class BoardApp {
+	Scanner sc = new Scanner(System.in);
+	BoardService bs = new BoardService();
+	
+	public BoardApp() {
+		start();
+	}
+
+	private void start() {
+		while(true) {
+			try {
+				bs.boardList();
+				//게시물 전체 리스트 출력
+				System.out.println("1. 게시물 등록   | 2. 게시뮬 수정,삭제   | 3. 뒤로가기");
+				
+				int selectNum = Integer.parseInt(sc.nextLine());
+				
+				if(selectNum == 1) {
+					bs.insertContent();
+				}else if(selectNum == 2) {
+					
+				}else if(selectNum == 3) {
+					System.out.println("✔");
+					break;
+				}else {
+					System.out.println("메뉴를 다시 선택해주세요.2");
+					break;
+				}
+			} catch(Exception e) {
+				System.out.println("메뉴를 다시 선택해 주세요.3");
+			}
+		}
+	}
+}

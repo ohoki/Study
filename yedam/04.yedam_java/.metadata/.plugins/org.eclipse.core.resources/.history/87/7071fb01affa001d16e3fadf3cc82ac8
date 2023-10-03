@@ -1,0 +1,9 @@
+package yhBank.exchangeRateUtils;
+
+import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+
+public class ExchangeRateUtils {
+	private static HttpURLConnection connection;
+	private static BigDecimal defaultExchangeRate = BigDecimal.valueOf(1300);
+}

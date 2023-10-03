@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.yedam.web.board.mapper.BoardMapper">
+  	<!-- 전체조회 -->
+  	<select id="selectBoradAllList" resultType="BoardVO">
+  		SELECT bno,
+  			   title,
+  			   contents,
+  			   writer,
+  			   regidate,
+  			   updatedate,
+  			   image
+  		FROM board
+  		ORDER BY bno
+  	</select>
+  	
+  	<!-- 단건조회 -->
+  	<select id="selectBoardInfo" resultType="BoardVO">
+  		SELECT bno,
+  			   title,
+  			   contents,
+  			   writer,
+  			   regidate,
+  			   updatedate,
+  			   image
+  		FROM board
+  		WHERE bno = #{bno}
+  	</select>
+  	
+  	<!-- 등록 -->
+  	<insert id="insertBoardInfo" parameterType="BoardVO">
+  		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+  			SELECT NVL(MAX(bno), 100) + 1 
+  			FROM board
+  		</selectKey>
+  		Insert INTO board
+  			( bno
+  			 ,title
+  			 <if test="contents != null and !contents.equals('')">
+  			 ,contents
+  			 </if>
+  			 ,writer
+  			 <if test="regidate != null">
+  			 ,regidate 
+  			 </if>
+  			 <if test="image != null and !image.equals('')">
+  			 ,image 
+  			 </if>
+  			)
+  			VALUES
+  			( #{bno}
+  			 ,#{title}
+  			 <if test="contents != null and !contents.equals('')">
+  			 ,#{contents}
+  			 </if>
+  			 ,#{writer}
+  			 <if test="regidate != null">
+  			 ,#{regidate} 
+  			 </if>
+  			 <if test="image != null and !image.equals('')">
+  			 ,#{image} 
+  			 </if>
+  			)
+  	</insert>
+  	
+  	<!-- 수정 -->
+  	<!-- 수정 대상 - 제목 || 내용 || 이미지 || 수정날짜 -->
+  	<!-- updatedate : 수정날짜는 항상 수정 -->
+	<update id="updateBoardInfo" parameterType="BoardVO">
+		UPDATE board
+		<set>
+			<if test="title != null and !title.equals('')">
+				title = #{title},
+			</if>
+			<if test="contents != null">
+				contents = #{contents},
+			</if>
+			<if test="title != null">
+				image = #{image},
+			</if>
+			<choose>
+				<when test="updatedate != null">
+					updatedate = #{updatedate}
+				</when>
+				<otherwise>
+					updatedate = sysdate
+				</otherwise>
+			</choose>
+		</set>
+		WHERE bno = #{bno}
+	</update>  	
+	
+  	<!-- 삭제 -->
+  	<delete id="deleteBoardInfo" parameterType="int">
+  		DELETE FROM board 
+  		WHERE bno = #{boardNo}
+  	</delete>
+  </mapper>

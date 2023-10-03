@@ -1,0 +1,5 @@
+package co.micol.notice.product.serviceImpl;
+
+public class ProductServiceImpl {
+	
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**-------------------- 반복문 --------------------------------------
+     * for문, while문, dowhile문
+     * for문 -> 기본 for, for..in, for..of
+     **/
+
+     //------------------- 기본 for --------------------------------------
+    let result = 0;
+    
+    for(let i=1; i<=4; i++) {
+      result += i;
+    }
+    
+    //1부터 100까지 더하는 연산
+    let sum = 0;
+
+    for(let i=1; i<=100; i++) {
+      sum += i;
+    }
+    console.log(sum);
+    //1~10까지 수 중에서 짝수만 출력
+    for(let i=0; i<=10; i+=2) {
+      console.log(i);
+    }
+    //1~100까지 홀수만 출력
+    for(let i=1; i<=100; i+=2) {
+      console.log(i);
+    }
+    //팩토리얼
+    let count = Number(prompt("원하는 값 입력"));
+
+    let fac = 1;
+    for(let i=1; i<=count; i++) {
+      fac *= i;
+    }
+    console.log(fac);
+    //2단 구구단 출력
+    for(let i=1; i<10; i++) {
+      console.log("2*"+i+"= "+2*i);
+    }
+    //--------------------2중 for문-------------------------------------------
+    //두개의 주사위의 합이 6위 되는 모든 경우 출력
+    for(let i=1; i<=6; i++) {
+      for(let j=1; j<=6; j++) {
+        if(i+j == 6) {
+          console.log(i+"+"+j+"= 6");
+        }
+      }
+    }
+    //2~9단 출력하기
+    for(let i=2; i<=9; i++) {
+      for(let j=1; j<=9; j++) {
+        console.log(i+"*"+j+"="+i*j);
+      }
+    }
+    //별찍기
+    let star = "";
+    for(let i=0; i<5; i++) {
+      for(let j=4; j>i; j--) {
+        star += " ";
+      }
+      for(let j=1; j<=1+2*i; j++) {
+        star += "*";
+      }
+      star += "\n";
+    }
+    for(let i=0; i<5; i++) {
+      for(let j=0; j<i; j++) {
+        star += " ";
+      }
+      for(let j=1; j<=9-2*i; j++) { 
+        star += "*";
+      }
+      star += "\n";
+    }
+    console.log(star);
+  </script>
+</body>
+</html>

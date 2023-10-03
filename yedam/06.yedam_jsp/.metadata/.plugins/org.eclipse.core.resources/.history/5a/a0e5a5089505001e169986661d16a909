@@ -1,0 +1,40 @@
+package co.micol.notice.product.serviceImpl;
+
+import java.util.List;
+
+import co.micol.notice.product.service.ProductService;
+import co.micol.notice.product.service.ProductVO;
+
+public class ProductServiceImpl implements ProductService {
+
+	@Override
+	public List<ProductVO> productSelectList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProductVO productSelect(ProductVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int productInsert(ProductVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int productUpdate(ProductVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int productDelete(ProductVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

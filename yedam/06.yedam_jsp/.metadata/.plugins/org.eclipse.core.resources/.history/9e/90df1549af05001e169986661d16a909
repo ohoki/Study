@@ -1,0 +1,12 @@
+package co.youngho.prj.controller;
+
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServlet;
+
+import co.youngho.prj.common.Command;
+
+public class FrontController<K> extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private HashMap<String, Command> map = new HashMap<>();
+}

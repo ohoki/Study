@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**------------------ switch문 ------------------------------------------------
+     * switch(변수) {
+     *  case 값:
+     *    실행 내용
+     *    break;
+     * }
+     **/
+
+    // const input = Number(prompt("숫자 입력"))
+
+    // switch(input%2) {
+    //   case 0:
+    //     alert("짝수");
+    //     break;
+    //   case 1:
+    //     alert("홀수");
+    //     break;
+    //   default:
+    //     alert("숫자가 아님");
+    //     break;  
+    // }
+
+    // //문제 1
+    // let point = prompt("점수를 입력하세요.");
+
+    // switch( parseInt(point/10) ) {
+    //   case 10:
+    //   case 9:
+    //     alert("A학점입니다.");
+    //     break;
+    //   case 8:
+    //     alert("B학점입니다.");
+    //     break;
+    //   case 7:
+    //     alert("C학점입니다.");
+    //     break;
+    //   case 6:
+    //     alert("D학점입니다.");
+    //     break;
+    //   default:
+    //     alert("F학점입니다.");
+    //     break;    
+    // }
+
+    //문제 2 (윤년 찾기)
+    let year = Number(prompt("연도 입력"));
+    let month = Number(prompt("월 입력"));
+    //마지막날 입력하는 변수
+    let day;
+    //구현 부분
+    switch(month) {
+      case 1: case 3: case 5: case 7: case 8: case 10: case 12: 
+        day = 31;
+        break;
+      case 4: case 6: case 9: case 11:
+        day = 30;
+        break;
+      case 2:
+        if(year%4 == 0 || year%400 == 0) {
+          if(year%100 == 0) { day = 28; } 
+          else              { day = 29; }
+          } else { day = 28; }
+    }
+    console.log(day);
+  </script>
+</body>
+</html>

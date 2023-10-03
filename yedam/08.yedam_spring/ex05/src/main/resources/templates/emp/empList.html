@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>전체 사원 조회</title>
+</head>
+<body>
+	<button type="button" th:onclick="|location.href='@{/empInsert}'|">등록</button>
+	<table>
+		<thead>
+			<tr>
+				<th>employee_id</th>
+				<th>first_name</th>
+				<th>job_id</th>
+				<th>hire_date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<th:block th:each="empInfo : ${empList}">
+				<tr th:onclick="|location.href='@{/empInfo(employeeId=${empInfo.employeeId})}'|">
+					<td th:text="${empInfo.employeeId}" />
+					<td th:text="${empInfo.firstName}" />
+					<td>[[ ${empInfo.jobId} ]]</td>
+					<td>[[ ${#dates.format(empInfo.hireDate, "yyyy년MM월dd일")} ]]</td>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>
+</body>
+</html>

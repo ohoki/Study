@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.notice.service.NoticeMapper">
+	<select id="noticeSelectList" 
+		resultType="co.micol.notice.service.NoticeVO">
+		SELECT * FROM notice order by notice_id  desc 
+	</select>
+	<select id="noticeSelect" 
+		parameterType= "co.micol.notice.service.NoticeVO"
+		resultType="co.micol.notice.service.NoticeVO">
+	 	SELECT * FROM notice
+	 	WHERE notice_id = #{noticeId}
+	</select>
+	<insert id="noticeInsert"
+		parameterType= "co.micol.notice.service.NoticeVO">
+		INSERT INTO notice
+		VALUES(#{noticeId},#{noticeWriter},#{noticeTitle},#{noticeSubject},#{noticeWdate},0)
+	</insert>
+	<update id="noticeUpdate"
+		parameterType= "co.micol.notice.service.NoticeVO">
+		UPDATE notice
+		<set>
+			where notice_id = ${noticeID}
+		</set>
+	</update>
+	<delete id="noticeDelete"
+		parameterType= "co.micol.notice.service.NoticeVO">
+		DELETE FROM notice
+		WHERE notice_id = #{noticeId}
+	</delete>
+</mapper>

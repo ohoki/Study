@@ -1,0 +1,8 @@
+package yhBank.account;
+
+public class AccountApp {
+	
+	public AccountApp() {
+		star();
+	}
+}

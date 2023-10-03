@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.java.book.mapper.BookMapper">
+	<!-- 전체조회 -->
+  	<select id="getBookList" resultType="BookVO">
+  		SELECT book_no,
+  			   book_name,
+  			   book_coverimg,
+  			   book_date,
+  			   book_price,
+  			   book_publisher,
+  			   book_info
+  		FROM book_tbl_06
+  		ORDER BY book_no
+  	</select>
+	
+	<!-- 등록 -->
+	<insert id="insertBookInfo" parameterType="BookVO">
+		INSERT INTO book_tbl_06 
+			(
+				book_no
+				, book_name
+				<if test="bookCoverimg != null and bookCoverimg.equals('')">
+				, book_coverimg
+				</if>
+				<if test="bookDate != null">
+				, book_date
+				</if>
+				<if test="bookPrice != null and bookPrice > 0">
+				, book_price
+				</if>
+				<if test="bookPublisher != null and bookPublisher.equals('')">
+				, book_publisher
+				</if>
+				<if test="bookInfo != null and bookInfo.equals('')">
+			    , book_info
+			    </if>
+			)
+			VALUES (
+				#{bookNo}
+				, #{bookName}
+				<if test="bookCoverimg != null and bookCoverimg.equals('')">
+				, #{bookCoverimg}
+				</if>
+				<if test="bookDate != null">
+				, #{bookDate}
+				</if>
+				<if test="bookPrice != null and bookPrice > 0">
+				, #{bookPrice}
+				</if>
+				<if test="bookPublisher != null and bookPublisher.equals('')">
+				, #{bookPublisher}
+				</if>
+				<if test="bookInfo != null and bookInfo.equals('')">
+				, #{bookInfo}
+				</if>
+			)
+	</insert>
+	
+	<!-- 도서번호 설정 -->
+	<select id="getBookNo" resultType="int">
+  		SELECT NVL(MAX(book_no),0) +1
+  		FROM book_tbl_06
+  	</select>
+  	
+</mapper>

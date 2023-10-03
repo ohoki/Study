@@ -1,0 +1,46 @@
+package yhBank.transaction;
+
+import java.util.List;
+
+import yhBank.member.Member;
+
+public class TransactionService {
+	//최근 한달 간 거래금액
+	public void lastMonthVolum() {
+		System.out.println("===어제 기준 회원 별 최근 한달 간 거래금액 (계좌 통합)===");
+		List<Transaction> list = TransactionDAO.getInstance().lastMonthVolum();
+		
+		for(int i=0; i<list.size(); i++) {
+			String auth = "";
+			if(list.get(i).getMemberAuth().equals("N")) {
+				auth = "일반 회원";
+			}else if(list.get(i).getMemberAuth().equals("V")) {
+				auth = "특별 회원";
+			}else if(list.get(i).getMemberAuth().equals("A")) {
+				auth = "관리자";
+			}
+			System.out.println(list.get(i).getMemberId() + "님(" + auth + ") : " + list.get(i).getTransactionVolum() + "원");
+		}
+	}
+	
+	//등급 갱신
+	public void updateAuth() {
+		int result = 0;
+		System.out.println("어제 기준 최근 한달 거래금액을 기준으로 등급을 갱신합니다. (500만원 이상 특별회원)");
+		List<Transaction> list = TransactionDAO.getInstance().lastMonthVolum();
+		
+		for(int i=0; i<list.size(); i++) {
+			boolean isTrue = list.get(i).getTransactionVolum()>=5000000;
+			if(isTrue) {
+				result = TransactionDAO.getInstance().updateAuth(list.get(i), true);
+			} else {
+				result = TransactionDAO.getInstance().updateAuth(list.get(i), false);
+			}	
+		}
+		if(result > 0) {
+			System.out.println("등급이 정상적으로 갱신되었습니다.");
+		} else {
+			System.out.println("등급 갱신에 실패했습니다.");
+		}
+	}
+}

@@ -1,0 +1,23 @@
+package co.micol.notice.member.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import co.micol.notice.common.Command;
+import co.micol.notice.member.service.MemberService;
+import co.micol.notice.member.service.MemberVO;
+import co.micol.notice.member.serviceImpl.MemberServiceImpl;
+
+public class MemberLogin implements Command {
+
+	@Override
+	public String exec(HttpServletRequest request, HttpServletResponse response) {
+		// 로그인
+		MemberService ms = new MemberServiceImpl();
+		MemberVO vo = new MemberVO();
+		vo.setMemberId(request.getParameter("memberId"));
+		vo.setMemberPw(request.getParameter("memberPw"));
+		return null;
+	}
+
+}

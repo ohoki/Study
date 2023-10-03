@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3단 레이아웃</title>
+  <style>
+    #container {
+      border: 1px solid #777;
+      width: 960px;
+      padding: 20px;
+      margin: 0 auto;
+    }
+    header {
+      border: 1px solid #777;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .flex {
+      display: flex;
+    }
+    .left_side {
+      border: 1px solid #777;
+      width: 220px;
+      padding: 20px;
+      float: left;
+      margin-bottom: 20px;
+      background-color: rgb(250, 241, 227);
+    }
+    section {
+      border: 1px solid #777; 
+      padding: 20px;
+      float: left;
+      margin: 0 5px 20px;
+      flex-grow: 1;
+    }
+    .right_side {
+      border: 1px solid #777;
+      width: 220px;
+      padding: 20px;
+      margin-bottom: 20px;
+      float: right;
+      background-color: rgb(250, 241, 227);
+    }
+    footer {
+      clear: both;
+      border: 1px solid #777;
+      padding: 10px;
+    }
+    .redtxt {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- HEADER -->
+    <header>
+      <p class="redtxt">
+        -container : 테투리 1px, 너비 960px, 안여백 20px, 화면 중앙에 위치 <br>
+        -header : 테투리 1px, 안여백 10px, 아래 요소와 간격 20px
+      </p>
+      <h1>사이트 제목</h1>
+    </header>
+
+    <div class="flex">
+      <!-- ASIDE -->
+      <aside class="left_side">
+        <h2>왼쪽 사이드 바</h2>
+        <p>광고1</p>
+        <p>광고2</p>
+        <p class="redtxt">
+          테투리 1px, 너비 220px, 안여백 20px, 
+          왼쪽으로 플로팅, 아래요소와 간격 20px, 배경색
+        </p>
+      </aside>
+      <!-- SECTION -->
+      <section>
+        <h2>본문</h2>
+        <p>내용 입력1</p>
+        <p>내용 입력2</p>
+        <p class="redtxt">
+          테투리 1px, 너비 ???px, <br>
+          안여백 20px, 왼쪽으로 플로팅, <br>
+          좌우요소와의 간격 5px,아래요소와 간격 20px
+        </p>
+      </section>
+      <!-- ASIDE -->
+      <aside class="right_side">
+        <h2>오른쪽 사이드 바</h2>
+        <p>광고1</p>
+        <p>광고2</p>
+        <p class="redtxt">
+          테투리 1px, 너비 220px, 안여백 20px, 
+          오른쪽으로 플로팅, 아래요소와 간격 20px, 배경색
+        </p>
+      </aside>
+    </div>
+    
+    <!-- FOOTER -->
+    <footer>
+      <h2>푸터</h2>
+      <p>저작권 정보, 연락처 등</p>
+      <p class="redtxt">테투리 1px, 양쪽 플로팅 해제, 안여백 10px</p>
+    </footer>
+</body>
+</html>

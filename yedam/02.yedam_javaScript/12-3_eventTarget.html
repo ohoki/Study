@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div>
+    <p>테스트 1</p>
+    <p>테스트 2</p>
+    <p>테스트 3</p>
+    <p>테스트 4</p>
+    <p>테스트 5</p>
+    <button type="button" onclick="pInfo()">클릭</button>
+  </div>
+
+  <script>
+    function pInfo() {
+      console.log(event.target.parentNode.children[0].textContent);
+    }
+  </script>
+
+</body>
+</html>

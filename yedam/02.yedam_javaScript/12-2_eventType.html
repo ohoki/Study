@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <input type="text" id="txtName">
+  <button type="button">버튼</button>
+  
+  <script>
+    let btn = document.querySelector("button");
+
+    btn.addEventListener("click",fncBtn);
+    btn.addEventListener("mouseover", fncBtn2);
+
+    function fncBtn() {
+      alert("버튼을 클릭함");
+    }
+    function fncBtn2() {
+      console.log("버튼을 클릭함");
+    }
+
+    let txtName = document.getElementById("txtName");
+    txtName.addEventListener("mouseover", fncTxt);
+    txtName.addEventListener("mouseout", fncTxt2);
+
+    function fncTxt() {
+      txtName.style.background = "yellow";
+    }
+    
+    function fncTxt2() {
+      txtName.style.background = "blue";
+    }
+
+    txtName.addEventListener("change", fncChange);
+
+    function fncChange() {
+      console.log("변경됨");
+    }
+  </script>
+</body>
+</html>

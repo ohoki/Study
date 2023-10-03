@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신상품 목록</title>
+  <style>
+    #container {
+      width: 80%;
+      margin: 0 auto;
+    }
+    li {
+      list-style: none;
+      position: relative;
+    }
+    img {
+      width: 300px;
+      height: 200px;
+    }
+    .caption {
+      position: absolute;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      width: 300px;
+      height: 200px;
+      text-align: center;
+      opacity: 0;
+      color: white;
+      transition: all 1000ms;
+    }
+
+    li:hover .caption {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>신상품 목록</h1>
+    <ul>
+      <li>
+        <img src="img/짱구 움짤.gif" alt="짱구">
+        <div class="caption">
+          <h3>상품1</h3>
+          <p>가격 : 10,000원</p>
+          <p>상품 설명</p>
+        </div>
+      </li>
+    </ul>
+  </a>
+  </div>
+</body>
+</html>

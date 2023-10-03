@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**-------------------- 문자, 문자열 ----------------------------------- 
+     * 문자 - '' 알파벳, 숫자, 한글 등등 한개
+     * 문자열 - "" 문자 한개 이상 **/
+
+    //------------------ 문자열 자르기(substring) ----------------------------
+    let str = "abcdefghijklmn";
+    console.log(str.substring(1, 5)); //bcde
+    console.log(str.substring(5)); //fghijklmn
+    //------------------ 문자 위치 찾기 --------------------------------------
+    let str2 = "hello world";
+    console.log(str2.indexOf("l")); //2
+
+    console.log(str2.indexOf("l", 4)); //9
+    console.log(str2.indexOf("z"));  //-1
+    //------------------ 소문자 -> 대문자 -------------------------------------
+    console.log(str2.toUpperCase());
+    console.log(str2.toLowerCase());
+    //문자열 끝자리 문자 확인
+    console.log(str2.endsWith('d')); //true
+
+    //구분자를 기준으로 문자 나누기
+    str = "hello,bye,java,power,book";
+    str2 = str.split(",");
+    console.log(str2);
+
+    //문자열 반복문 실행
+    str = "hello";
+    for(let i=0; i<str.length; i++) {
+      console.log(str.substring(i,i+1) + " 위치는 "+ i+" 입니다.");
+    }
+    //해당 인덱스의 문자 얻기
+    str3 = "hello";
+    console.log(str3.charAt(1)); // e
+
+    //------------------------------------------------------------------------------------------
+    //문자열을 활용한 반복문
+    //마지막 자리가 3,6,9,로 끝이나면 *로 표시를 해줍니다.
+    let num = Number(prompt("숫자를 입력하시오."));
+
+    for(let i =1; i<=num; i++) {
+      let iStr = String(i);
+      if(iStr.endsWith("3") || iStr.endsWith("6") || iStr.endsWith("9")) {
+        iStr = iStr.substring(0, iStr.length-1);
+        iStr += "*";
+      }
+      console.log(iStr);
+    }
+
+    //문자열 뒤집기
+    let str10 = "hello World";
+    let temp;
+    let newStr = "";
+
+    for(let i=1; i<=str10.length; i++) {
+      temp = str10.charAt(str10.length-i);
+      newStr += temp;
+    }
+    console.log(newStr);
+    </script>
+</body>
+</html>

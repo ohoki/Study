@@ -1,0 +1,223 @@
+package yhBank.member;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import yhBank.common.DAO;
+
+public class MemberDAO extends DAO {
+	//싱 글 톤
+	private static MemberDAO memDao = null;
+	
+	private MemberDAO() { }
+	
+	public static MemberDAO getInstance() {
+		if(memDao == null) {
+			memDao = new MemberDAO();
+		}
+		return memDao;
+	}
+
+	//멤버 찾기
+	public Member selectMember(String id) {
+		Member member = null;
+		
+		try {
+			conn();
+			
+			String sql = "SELECT * FROM member WHERE member_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member = new Member();
+				member.setMemberId(rs.getString("member_id"));
+				member.setMemberPw(rs.getString("member_pw"));
+				member.setMemberName(rs.getString("member_name"));
+				member.setMemberPhone(rs.getString("member_phone"));
+				member.setMemberAddr(rs.getString("member_addr"));
+				member.setMemberAnswer(rs.getString("member_answer"));
+				member.setMemberAuth(rs.getString("member_auth"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return member;
+	}
+	
+	//로그인
+	public Member login(String id) {
+		Member member = selectMember(id);
+		
+		return member;
+	}
+	
+	//회원가입
+	public int insertMember(Member member) {
+		int result = 0;
+		
+		try {
+			conn();
+			
+			String sql = "INSERT INTO member VALUES(?,?,?,?,?,?,'N')";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberPw());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setString(4, member.getMemberPhone());
+			pstmt.setString(5, member.getMemberAddr());
+			pstmt.setString(6, member.getMemberAnswer());
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//아이디 찾기(이름,휴대폰,질문을 통해 찾기)
+	public Member findId(String name, String phone, String answer) {
+		Member member = null;
+		
+		try {
+			conn();
+			
+			String sql = "SELECT * FROM member WHERE member_name = ? AND member_phone = ? AND member_answer = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, phone);
+			pstmt.setString(3, answer);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member = new Member();
+				member.setMemberId(rs.getString("member_id"));
+				member.setMemberName(rs.getString("member_name"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return member;
+	}
+	
+	//비밀번호 찾기
+	public Member findPw(String id, String answer) {
+		Member member = null;
+		
+		try {
+			conn();
+			
+			String sql = "SELECT * FROM member WHERE member_id = ? AND member_answer = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, answer);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member = new Member();
+				member.setMemberId(rs.getString("member_id"));
+				member.setMemberPw(rs.getString("member_pw"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return member;
+	}
+	
+	//계좌 조회 (관리자용)
+	public List<Member> checkAllAccount() {
+		List<Member> list = new ArrayList<>();
+		Member account = null;
+		
+		try {
+			conn();
+			String sql = "select m.member_auth, m.member_id, m.member_name, m.member_phone, m.member_addr, a.account_number, a.account_c_date, a.account_balance from member m LEFT JOIN account a ON(m.member_id = a.member_id) ORDER BY m.member_auth";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				account = new Member();
+				account.setMemberId(rs.getString("member_id"));
+				account.setMemberName(rs.getString("member_name"));
+				account.setMemberPhone(rs.getString("member_phone"));
+				account.setMemberAddr(rs.getString("member_addr"));
+				account.setMemberAuth(rs.getString("member_auth"));
+				account.setAccountNumber(rs.getString("account_number"));
+				account.setAccountCDate(rs.getDate("account_c_date"));
+				account.setAccountBalance(rs.getInt("account_balance"));
+				list.add(account);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return list;
+	}
+	
+	//정보 수정
+	public int updateMember(Member data, int selectNum) {
+		int result = 0;
+		Member member = null;
+			System.out.println(data.getMemberName());
+			System.out.println(data.getMemberPhone());
+			System.out.println(data.getMemberPw());
+			System.out.println(data.getMemberId());
+			System.out.println(data.getMemberAddr());
+			
+		try {
+			conn();
+			if(selectNum == 1) {
+				String sql = "UPDATE member SET member_name = ? WHERE member_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, data.getMemberName());
+				pstmt.setString(2, MemberService.memberInfo.getMemberId());
+				rs = pstmt.executeQuery();
+			}else if(selectNum == 2) {
+				String sql = "UPDATE member SET member_phone = ? WHERE member_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, data.getMemberPhone());
+				pstmt.setString(2, MemberService.memberInfo.getMemberId());
+				rs = pstmt.executeQuery();
+			}else if(selectNum == 3) {
+				String sql = "UPDATE member SET member_addr = ? WHERE member_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, data.getMemberAddr());
+				pstmt.setString(2, MemberService.memberInfo.getMemberId());
+				rs = pstmt.executeQuery();
+			}else if(selectNum == 4) {
+				String sql = "UPDATE member SET member_pw = ? WHERE member_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, data.getMemberPw());
+				pstmt.setString(2, MemberService.memberInfo.getMemberId());
+				rs = pstmt.executeQuery();
+			}
+			if(rs.next()) {
+				member = new Member();
+				member.setMemberPw(rs.getString("member_pw"));
+				member.setMemberName(rs.getString("member_name"));
+				member.setMemberAddr(rs.getString("member_addr"));
+				member.setMemberPhone(rs.getString("member_phone"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+}

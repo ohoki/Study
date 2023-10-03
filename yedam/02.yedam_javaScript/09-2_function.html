@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //============== 나머지 매개변수 - 매개변수가 몇개인지 모를 때 =================================
+    function sum (...items) {
+      console.log(items);
+      let sum = 0;
+      for(let i=0; i<items.length; i++) {
+        sum += items[i];
+      }
+      console.log(`${items}의 총 합계 : ${sum}`);
+    }
+
+    sum(1,2,3,4); //[1, 2, 3, 4] 배열로 데이터를 받아온다 (매개변수)
+    sum(1,2); //[1, 2]
+
+      //최소값 구하기
+    function min(...array) {
+      let minNumber = array[0];
+      for(let i =0; i<array.length; i++) {
+        if(minNumber > array[i]) {
+          minNumber = array[i];
+        }
+      }
+      return minNumber;
+    }
+    console.log(`min(1,2,6,7,0,2,10)의 최소값: ${min(1,2,6,7,0,2,10)}`);
+
+    // 나머지 매개변수 + 일반 매개변수 조합
+    function mininum(first,...rests) {
+      console.log(typeof first);
+      console.log(typeof rests);
+    }
+    mininum(1,2,3,4,5);
+    // mininum(1,2,3,4); // 1 2 [3, 4]
+    // mininum(1,2); // 1 2 []
+    
+    //최소값 구하기
+    function mininum2(first,...rests) {
+      let output;
+      let items;
+
+      if(Array.isArray(first)) {
+        output = first[0];
+        items = first;
+      } else if(typeof(first) == "number") {
+        output = first;
+        items = rests;
+      }
+
+      for(let i =1; i<=items.length; i++) {
+        if(output > items[i]) {
+          output = items[i];
+        }
+      }
+      return output;
+    }
+    console.log(mininum2(1,2,3,4,5));
+    console.log(mininum2([1,2,3,4,5,0])); 
+
+    //================== 전개 연산자 ============================================
+    function temp (...spread) {
+      console.log(spread);
+    }
+    //배열로 넣을 때와 일반 데이터로 넣을 때의 차이점
+    temp(1,2,3,4,5); // [1, 2, 3, 4, 5]  0:1, 1:2, 2:3, 3:4, 4:5 length:5
+    temp([1,2,3,4,5]); // 0:[1, 2, 3, 4, 5] length:1
+    temp(...[1,2,3,4,5]); // [1, 2, 3, 4, 5]  0:1, 1:2, 2:3, 3:4, 4:5 length:5 -> ... 전개연산자!!!!
+
+    // defalt 매개변수 - 매개변수로 데이터를 전달하지 않아도 가지는 기본값( default )
+    function earning(name, wage=8500, hour=40) {
+      console.log(`# ${name}님의 급여 정보`);
+      console.log(`- 시급 : ${wage}원`);
+      console.log(`- 근무 시간 : ${hour}시간`);
+      console.log(`- 급여 : ${wage * hour}원`);
+      console.log("");
+    }
+
+    earning("구름");
+    earning("별", 10000);
+    earning("달", 10000, 52);
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** ----------연산자 ------------------------------------------------------------------
+     * 단항 ( ++, -- ) - 증감 연산자
+     * 
+     * 이항 ( + - * / % ) - 산술 연산자 -> % 를 모듈러 연산자라고도 한다.
+     * 대입 연산자 ( = ) - 우항을 좌항에 대입한다.
+     * 복합 대입 연산자 ( +=, -=, *=, /=, %= )
+     * 비교 연산자 ( ==, !=, ===, <, >, >=, <= )
+     * 논리 연산자 ( &&, ||, TRUE(1이상), FALSE(0) ) - && ( * ), || ( + )이므로 &&가 더 우선순위이다.
+     * 문자열 연산자 ( + ) - 문자 사이에서 +를 사용하면 두개의 문자를 합칠 때 사용됨
+     * 부정 연산자 ( ! )
+     * 
+     * 삼항 ( 조건 ? True : False )
+     **/
+
+    let fNum = 1;
+    let sNum = 2;
+    let tNum = "1";
+
+    console.log( fNum == tNum ); //true
+    console.log( fNum === tNum ); //false
+
+    console.log( fNum > sNum && fNum <= sNum); //false
+    console.log( fNum > sNum || fNum <= sNum); //true
+
+    let str9 = "yedam"+" "+"yedam"+100+100;
+    console.log(str9); //yedam yedam100100 ( 자동 타입 변환 )
+
+
+
+    //입력받은 세자리 수의 각 자리의 합을 구해 출력하세요.
+    //ex) 888 -> 8 + 8 + 8 = 24
+    let number = window.prompt("세자리 수 입력");
+    //풀이
+    // let answer = number%10; //8
+    // number = parseInt(number/10); //88
+    // answer += number%10; // 8 + 8
+    // number = parseInt(number/10); //8
+    // answer += number%10;
+    let answer = 0;
+    
+    while(number != 0) {
+      answer += number%10;
+      number = parseInt(number/10);
+    }
+    //출력
+    window.alert(answer);
+
+  </script>
+</body>
+</html>

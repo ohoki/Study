@@ -1,0 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div align="center">
+		<div>
+			<jsp:include page="../menu/menu.jsp"></jsp:include>
+		</div>
+		<div><h1>게시글 상세보기</h1></div>
+		<div>
+			<table border="1">
+				<tr align="center">
+					<th width="70">순번</th>
+					<td width="50">${notice.noticeId}</td>
+					<th width="100">작성자</th>
+					<td width="150">${notice.noticeWriter}</td>
+					<th width="100">작성일자</th>
+					<td width="150">${notice.noticeWdate}</td>
+					<th width="100">조회수</th>
+					<td width="70">${notice.noticeHit}</td>
+				</tr>
+			</table>
+		
+			번호 : ${notice.noticeId} <br>
+			내용 : ${notice.noticeSubject}
+		</div>
+	</div>
+</body>
+</html>

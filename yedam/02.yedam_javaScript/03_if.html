@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**----------------------- if문 ----------------------------------
+     * if(조건) { 조건이 참일 경우에 내용 실행 };
+     **/
+    
+    if(273 > 100) { alert("true"); } 
+    else          { alert("false"); }
+
+    //시간을 가져오는 기능 new Date();
+    const date = new Date(); //현재 시간 가져오기
+    const hour = date.getHours(); // 현재 몇 시인지 데이터 가져오기
+    
+    if(hour < 12) { console.log("오전입니다."); } 
+    else          { console.log("오후입니다."); }
+    //삼항 연산자로 변환
+    let text = hour < 12 ? console.log("오전입니다.") : console.log("오후입니다.");
+    
+    //if ~ else if ~ else 문
+    let point = prompt("점수를 입력하세요.");
+
+    if( 90 <= point ) {
+      console.log("A학점입니다.");
+    } else if( 80 <= point ) {
+      console.log("B학점입니다.");
+    } else if( 70 <= point ) {
+      console.log("C학점입니다.");
+    } else if( 60 <= point ) {
+      console.log("D학점입니다.");
+    } else {
+      console.log("F학점입니다.");
+    }
+
+    //홀수 짝수 판단하기
+    let num = prompt("숫자 입력");
+
+    if(num%2 == 0) { console.log("짝수"); } 
+    else           { console.log("홀수"); }
+
+    //중첩 if문 ( 2의 배수이고 5의 배수인 숫자 출력 )
+    let num2 = prompt("숫자 입력");
+    
+    if( num2 % 2 == 0 ) {
+      if( num2 % 5 == 0 ) {
+        console.log("2의 배수이고 5의 배수인 숫자: " + num2);
+      } else {
+        console.log("2의 배수이지만 5의 배수는 아닌 숫자: " + num2);
+      }
+    } else {
+      console.log("꽝");
+    }
+
+    let walkAmount = prompt("하루 걷는 양?");
+
+    if(walkAmount > 10000) {
+      document.write("아주 훌륭합니다.<br>");
+    }   
+
+    let userName = prompt("방문자의 이름");
+
+    if(userName != "smith") { document.write(userName + "님 반갑습니다."); }
+
+    //confirm() -> 확인 / 취소
+    let result = confirm("정말로 탈퇴하시겠습니까?");
+
+    if(result) { //확인
+      alert("탈퇴 완료");
+    } else { //취소
+      alert("탈퇴 처리 취소");
+    }
+
+    //간단한 ID/PW 확인 절차    
+    let id = "yedam";
+    let pw = "1234";
+
+    let userId = prompt("ID 입력");
+    let userPw = prompt("PW 입력");
+
+    if (id == userId) {
+      if(pw == userPw) {
+        document.write(userId + "님 반갑습니다.");
+      } else {
+        alert(userId + "님 비밀번호가 틀렸습니다.");
+        location.reload(); // 새로고침 기능
+      }
+    } else {
+      alert("ID가 틀렸습니다.");
+        location.reload();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	body{
+		margin: 0;
+	}
+	#nav{
+		background-color: black;
+		padding: 20px;
+	}
+	a{
+		text-decoration: none;
+		color: white;
+		font-weight: bold;
+	}
+	
+</style>
+</head>
+<body>
+	<div id="nav">
+		<a href="noticeList.do">게시물 목록 보기</a>
+		<a href="memberList.do">멤버 목록 보기</a>
+		<a href="memberJoin.do">회원가입</a>
+		<a href="memberLoginForm.do">로그인</a>
+	</div>
+	<div align="center">
+		<h1>Welcome to My home</h1>
+	</div>
+</body>
+</html>

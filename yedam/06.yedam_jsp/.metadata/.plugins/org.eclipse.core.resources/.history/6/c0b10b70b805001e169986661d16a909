@@ -1,0 +1,30 @@
+package co.youngho.prj.controller;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import co.youngho.prj.common.Command;
+
+public class FrontController<K> extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private HashMap<String, Command> map = new HashMap<String, Command>();
+	
+	public FrontController() {
+		super();
+	}
+
+	public void init() throws ServletException {
+		map.put("/main.do", new Main());
+	}
+	
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	}
+	
+	
+}

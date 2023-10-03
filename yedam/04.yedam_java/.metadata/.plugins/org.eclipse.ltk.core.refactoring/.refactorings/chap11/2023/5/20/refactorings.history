@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.yedam.API.Math&apos; to &apos;MathExample&apos;&#x0D;&#x0A;- Original project: &apos;chap11&apos;&#x0D;&#x0A;- Original element: &apos;com.yedam.API.Math&apos;&#x0D;&#x0A;- Renamed element: &apos;com.yedam.API.MathExample&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Math&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.yedam.API{Math.java[Math" matchStrategy="1" name="MathExample" qualified="false" references="true" similarDeclarations="false" stamp="1684293305147" textual="false" version="1.0"/>
+</session>

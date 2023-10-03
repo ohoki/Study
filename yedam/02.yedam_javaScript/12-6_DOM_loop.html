@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .red { background-color: brown; color: white; font-size: 10px;}
+</style>
+<body>
+  <div id="app">
+    <!--span, h2, img, ul, li -->
+  </div>
+  
+  <script>
+    //span
+    let span = document.createElement("span");
+    span.classList.add("red");
+    span.setAttribute("id", "sp1");
+    span.textContent = "span이요~~"
+
+    //h2
+    let h2 = document.createElement("h2");
+    h2.textContent = "h2 텍스트요~"
+
+    //img
+    let img = document.createElement("img");
+    img.setAttribute("src", "img/이주빈 화보.jpg");
+    img.setAttribute("img", "loading fail");
+    img.style.width = "200px";
+
+    //ul,li
+    let ul = document.createElement("ul");
+
+    for(let i=0; i<3; i++) {
+      let li = document.createElement("li");
+      li.classList.add("red");
+      li.textContent = `텍스트 ${i}`;
+      ul.appendChild(li);
+    }
+
+    let div = document.getElementById("app");
+    div.appendChild(span);
+    div.appendChild(h2);
+    div.appendChild(img);
+    div.appendChild(ul);
+  </script>
+</body>
+</html>

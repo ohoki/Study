@@ -1,0 +1,7 @@
+package co.youngho.prj.common;
+
+import javax.servlet.http.HttpServletRequest;
+
+public interface Command {
+	public String exec(HttpServletRequest request, HttpServletRequest response);
+}

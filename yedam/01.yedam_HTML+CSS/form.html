@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>폼 만들기</title>
+  <style>
+    form {
+      width: 500px;
+      margin: 0 auto;
+    }
+    li {
+      list-style: none;
+    }
+    form label {
+      width: 100px;
+      float: left;
+    }
+    legend {
+      font-weight: bold;
+      background-color: beige;
+      border-radius: 5px;
+    }
+    .button_field {
+      text-align: center;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <form action="login.jsp" method="post" name="login">
+    <!-- 로그인 정보 -->
+    <fieldset> 
+      <legend>로그인 정보</legend>
+      <ul>
+        <li>
+          <label for="user_id">ID</label>
+          <input type="text" id="user_id" name="user_id" autofocus required>
+        </li>
+        <li>
+          <label for="user_pw">PW</label>
+          <input type="password" id="user_pw" name="user_pw">
+        </li>
+        <li>
+          <label for="u_select">과일</label>
+          <select id="u_select">
+            <optgroup label="빨간색과일">
+              <option value="apple">사과</option>
+              <option value="tomato" selecteds>토마토</option>
+            </optgroup>
+            <optgroup label="노란색과일">
+              <option value="banana">바나나</option>
+              <option value="lemon">레몬</option>
+              <option value="lemon  
+              ">토마토</option>
+            </optgroup>
+          </select>
+        </li>
+        <li>
+          <label for="u_list">영어과목</label>
+          <input type="text" id="u_list" list="d_list">
+          <datalist id="d_list">
+            <option value="grammer" label="문법"></option>
+            <option value="voca" label="어휘"></option>
+            <option value="speaker" label="회화"></option>
+          </datalist>
+        </li>
+        <li>
+          <label for="t_area">메모</label>
+          <textarea name="t_area" id="t_area" cols="30" rows="5" placeholder="지원동기를 간략히 입력해 주세요."></textarea>
+        </li>
+      </ul>
+    </fieldset>
+    <!-- 개인정보 -->
+    <fieldset>
+      <legend>개인정보</legend>
+      <ul>
+        <li>
+          <label for="user_name">name</label>
+          <input type="text" name="user_name" id="user_name" value="홍길동" readonly>
+        </li>
+        <li>
+          <label for="user_tel">tel</label>
+          <input type="tel" name="user_tel" id="user_tel" placeholder="- 를 제외한 숫자만 입력하시오.">
+        </li>
+        <li>
+          <label for="user_mail">mail</label>
+          <input type="email" name="user_mail" id="user_mail">
+        </li>
+        <li>
+          <label for="user_num">number</label>
+          <input type="number" name="user_num" id="user_num" min="5" max="50" step="5" value="5">
+        </li>
+        <li>
+          <label for="user_slide">slide</label>
+          <input type="range" name="user_slide" id="user_slide" min="0" max="5">
+        </li>
+        <li>
+          <label for="user_color">color</label>
+          <input type="color" id="user_color" name="user_name" value="#00ff01">
+        </li>
+        <li>
+          <label for="user_datetime">년월일시간</label>
+          <input type="datetime-local" name="user_datetime" id="user_datetime">
+        </li>
+        <li>
+          <label for="user_date">년월일</label>
+          <input type="date" name="user_date" id="user_date">
+        </li>
+        <li>
+          <label for="user_month">년월</label>
+          <input type="month" name="user_month" id="user_month">
+        </li>
+        <li>
+          <label for="user_week">년주</label>
+          <input type="week" name="user_week" id="user_week">
+        </li>
+        <li>
+          <label for="user_file">파일전송</label>
+          <input type="file" name="user_file" id="user_file">
+        </li>
+        <li>
+          <label for="user_image">이미지</label>
+          <input type="image" name="user_image" id="user_image" src="img/짱구 움짤.gif" width="50px">
+        </li>
+        <li>
+          <label for="user_btn">버튼</label>
+          <input type="button" name="user_btn" id="user_btn" value="새창열기" onclick="window.open()">
+        </li>
+      </ul>
+    </fieldset>
+    <!-- 체크박스 -->
+    <fieldset>
+      <ul>
+        <li>
+          <label><input type="radio" name="grade" value="basic">기본</label> 
+          <label><input type="radio" name="grade" value="middle" checked>중급</label>
+          <label><input type="radio" name="grade" value="high">고급</label>
+        </li>
+        <li>
+          <label><input type="checkbox" name="color" value="red">빨강</label>
+          <label><input type="checkbox" name="color" value="green">초록</label>
+          <label><input type="checkbox" name="color" value="blue">파랑</label>
+        </li>
+      </ul>
+    </fieldset>
+    <!-- 버튼 -->
+    <fieldset class="button_field">
+      <input type="submit" value="submit">
+      <input type="reset" value="reset">
+    </fieldset>
+  </form>
+</body>
+</html>

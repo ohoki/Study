@@ -1,0 +1,51 @@
+package yhBank.member;
+
+import java.util.Scanner;
+
+import yhBank.account.AccountService;
+import yhBank.board.BoardApp;
+import yhBank.transaction.TransactionDAO;
+import yhBank.transaction.TransactionService;
+
+public class AdminApp {
+	Scanner sc = new Scanner(System.in);
+	MemberService ms = new MemberService();
+	AccountService as = new AccountService();
+	TransactionService ts = new TransactionService();
+	
+	public AdminApp() {
+		start();
+	}
+	
+	private void start() {
+		while(true) {
+			try {
+				System.out.println("================================================================================================================");
+				System.out.println("==  1. 전체 조회  | 2. 회원 별 한달 간 거래금액 (계좌 통합)  | 3. 회원 등급 갱신  | 4. 이자 지급  | 5. 민원 게시판  | 6. 로그아웃  ==");
+				System.out.println("================================================================================================================");
+				
+				int selectNum = Integer.parseInt(sc.nextLine());
+				
+				if(selectNum == 1) {
+					as.checkAccount();
+				}else if(selectNum == 2) {
+					ts.lastMonthVolum();
+				}else if(selectNum == 3) {
+					ts.updateAuth();
+				}else if(selectNum == 4) {
+					as.interest();
+				}else if(selectNum == 5) {
+					new BoardApp();
+				}else if(selectNum == 6) {
+					MemberService.memberInfo = null;
+					System.out.println("관리자모드를 종료합니다 :)");
+					break;
+				}else {
+					System.out.println("메뉴를 다시 선택해주세요.");
+				}
+			} catch(Exception e) {
+				System.out.println("메뉴를 다시 선택해 주세요.2");
+			}
+		}
+	}
+}

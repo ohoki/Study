@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //DOMContentLoaded -브라우저 페이지가 다 로딩되고 나서 수행해야할 내용을 정의
+    document.addEventListener("DOMContentLoaded", () => {
+      let h1 = document.createElement("h1");
+      h1.textContent = "페이지가 다 로딩되고 나서 추가됨~!";
+      document.body.append(h1);
+    });
+  </script>
+
+  <section id="section_sample">
+    <div id="div_sample">
+      <input type="button" value="클릭">
+      <input type="button" value="클릭2" onclick="addPtag()">
+    </div>
+  </section>
+
+  <script>
+    //addEventListener - DOM객체.addEventListener("이벤트 종류", 함수);
+    let btn = document.querySelector('#div_sample input[type="button"]');
+    btn.addEventListener( "click", () => { 
+      let pTag = document.createElement("p");
+      pTag.textContent = "p태그 생성이요~";
+
+      let div = document.getElementById("div_sample");
+      div.append(pTag);
+    });
+
+    //onclick - <tag onclick ="함수">
+    function addPtag() {
+      let pTag = document.createElement("p");
+      pTag.textContent = "p태그 생성이요~";
+
+      let div = document.getElementById("div_sample");
+      div.append(pTag);
+    }
+  </script>
+</body>
+</html>
