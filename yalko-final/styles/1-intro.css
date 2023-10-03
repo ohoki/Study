@@ -1,0 +1,81 @@
+.intro {
+  position: relative;
+  /* (자식태그에서 absolute 또는 fixed 사용하기 위해 relative 사용) */
+  background-image: url(../images/intro-bg.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+/* 배경 이미지를 반투명 검정으로 가리기 */
+.intro__dark {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.67);
+}
+
+.intro__type {
+  display: inline-flex;
+  gap: 0.32em;
+  font-family: var(--font-code);
+  font-size: 2.8em;
+  font-weight: bold;
+  color: white;
+}
+
+@keyframes blink {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.intro__type .underscore {
+  animation-name: blink;
+  animation-duration: 350ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+[class^="intro__tilt"] {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25%;
+  background-color: var(--color-main);
+  clip-path: polygon(100% 90%, 100% 100%, 0 100%, 0 0);
+}
+
+.intro__tilt--flip {
+  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 90%);
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .intro {
+    height: 100vh;
+  }
+  .intro__type {
+    margin-top: 36vh;
+    flex-direction: column;
+    text-align: left;
+  }
+}
+
+@media (min-width: 769px) {
+  .intro {
+    height: 500px;
+  }
+  .intro__type {
+    margin-top: 172px;
+    align-items: center;
+  }
+  .intro__type span{
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0.25em;
+  }
+}
+
+
+
