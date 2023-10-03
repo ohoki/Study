@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sample</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>제목</p>
+    <input type="text" name="title" value="스토너">
+  </div>
+  <script>
+    // let pTag = document.querySelector('#app > p');
+    // pTag = document.getElementById('app').querySelector('p');
+    // console.log(pTag.textContent);
+
+    // let inputTag = document.querySelector('input[name="title"]');
+    // input = document.getElementsByName('title')[0];
+    // let title = inputTag.value;
+
+    // let hTag = document.createElement('h3');
+    // hTag.textContent = title;
+
+    // let div = document.getElementById('app');
+
+    // div.append(hTag);
+
+    let pTag = jQuery('#app > p');
+    console.log(pTag.text());
+
+    let inputTag = $('input[name="title"]');
+    let title = inputTag.val();
+
+    let hTag = $('<h3/>');
+    hTag.text(title);
+
+    $('div').append(hTag);
+    </script>
+</body>
+</html>

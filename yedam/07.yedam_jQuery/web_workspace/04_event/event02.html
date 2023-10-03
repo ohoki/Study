@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>event02</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <p>
+    <img src="http://place-hold.it/300x300" class="img1">
+  </p>
+  <script>
+    //자바스크립트
+    window.onload = function(e) {}; //페이지 완성
+    document.addEventListener('DOMCotentLoaded', function(e) {}); //DOM만 완성
+
+    //jQuery
+    //ready -> html 문서 로딩이 완료된 후에 동작
+    // $(document).ready(function() {}); <- 사용이 권장되지 않음
+    $(function() {
+      let h1 = $('.img1').height();
+      console.log("ready : ", h1); // ready :  0
+    });
+    //load -> 외부에 연동된 코드(iframe, img, video, embad)의 로딩이 완료된 후에 동작
+    $(window).on('load', function() {
+      let h2 = $('.img1').height();
+      console.log("load : ", h2); // load :  300
+    });
+  </script>
+</body>
+</html>

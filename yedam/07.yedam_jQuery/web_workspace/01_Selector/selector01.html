@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>selector01</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(e) {
+      getMessage('첫번째 script 태그');
+      let jqTag = document.getElementById('title');
+      jqTag.style.color = 'blue';
+    })
+  </script>
+  <div>
+    <h1 id="title">제목</h1>
+  </div>
+  <!-- 스크립트의 위치에 따라 실행될 수도 되지 않을 수도 있다. -->
+  <script>
+    // $(document).ready(function(e){}; 와 같다
+    $(function(e){
+      getMessage('두번째 script 태그');
+      let h1Tag = $('#title');
+      h1Tag.css('color', 'red');
+    });
+  </script>
+  <script src="selector.js"></script>
+  <script>
+    getMessage('마지막 script 태그');
+  </script>
+  <div>
+    <h1 class="blue">제이쿼리</h1>
+    <h2 id="title">선택자</h2>
+    <h3 class="blue">직접선택자</h3>
+    <h4>그룹선택자</h4>
+  </div>
+  <script>
+    //직접 선택자 : Node가 가지고 있는 속성들
+
+    //전체 선택자 : *
+    $('*').css('border', '1px solid blue');
+
+    //아이디 선택자 : #
+    $('#title').css('background-color', 'grey')
+              .css('border', '2px solid black');
+
+    //클래스 선택자 : .class값
+    let classTag = $('.blue');
+    classTag.text('동일한 내용 적용');
+
+    for(let i=0; i< classTag.length; i++) {
+      // classTag[i].textContent = i;
+      $(classTag[i]).text(i);
+    }
+
+    //태그 선택자 : 태그이름
+    $('h3').text('직접 선택자로 다시 변경');
+
+    //그룹 선택자 : , , ,
+    setTimeout(() => $('h1#title, h4').css('color', 'green'), 1000);
+
+    //종속 선택자 : 특정 속성을 가진 태그
+    $('h1.blue').text('종속 선택자로 선택');
+
+  </script>
+</body>
+</html>

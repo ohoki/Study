@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    margin: 3px;
+    background-color: rgb(253, 252, 220);
+    background-color: #f07167;
+    background-color: rgb(254, 217, 183);
+}
+
+
+--color-white: #ffffff;
+  --color-light-white: #eeeeee;
+  --color-dark-white: #bdbdbd;
+  --color-grey: #616161;
+  --color-dark-grey: #4d4d4d;
+  --color-light-grey: #7c7979;
+  --color-black: #000000;
+  --color-red: #E64E39;
+  --color-dark-blue: #2A3B59;
+  --color-blue: #01BABD;
+  --color-light-blue: rgb(174, 213, 245, 0.3);
+  --color-green: #9CBB3A;
+  --color-orange: #F9A634;
+  --color-beigie: #ffe5d2;
+
+body {
+    width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+#input_data {
+    text-align: center;
+    float: left;
+}
+
+label {
+    display: inline-block;
+    width: 220px;
+    background-color: #eee;
+}
+
+#input_data input {
+    width: 380px;
+}
+
+#btn {
+    text-align: center;
+    float: right;
+    margin: 45px 60px;
+}
+
+#btn input,
+#btn button {
+    width: 100px;
+}
+
+#list {
+    clear: both;
+}
+
+#list button {
+    width: 80px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 20px;
+    border: 1px solid black;
+    text-align: left;
+    width: 100%;
+}
+
+tr {
+    margin-bottom: 20px;
+}
+
+th {
+    color: white;
+    padding: 13px 25px;
+    background-color: #555;
+}
+
+td {
+    padding: 8px 25px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>selector06</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <!-- 콘텐츠 탐색자 -->
+  <div id="outer_wrap">
+    <h1>콘텐츠 탐색 선택자</h1>
+    <section id="inner_1">
+      <h1>contains(), has()</h1>
+      <p>
+        <span>내용1</span>
+      </p>
+      <p>
+        내용 추가<br>
+        <strong>내용2</strong>
+      </p>
+      <p>
+        <span>내용3</span>
+      </p>
+    </section>
+    <section id="inner_2">
+      <h1>not()</h1>
+      <p>내용4</p>
+      <p>내용5</p>
+      <p>내용6</p>
+    </section>
+  </div>
+  <script>
+    //contains() : 태그가 가지고 있는 텍스트 중 해당 문자를 포함하는 경우
+    $('#inner_1 p:contains("내용1")').css('background-color', 'skyblue');
+
+    //has() : 하위요소 중에 해당 태그를 포함하고 있는 태그를 검색
+    $('#inner_1 P:has(strong)').css('border', '2px solid orange');
+
+    //not() : 검색결과 중에 제외하고자 하는 조건(선택자)을 지정
+    $('#inner_1 p:not(:eq(2))').css('background-color', 'green');
+    $('#inner_2 p').not(':last').css('color', '#f00');
+  </script>
+  <div id="outer_content">
+    <section id="in_1">
+      <h2>find(), filter()</h2>
+      <p class="txt1">내용1</p>
+      <p class="txt1">내용2</p>
+      <p class="txt2">내용3</p>
+    </section>
+    <section id="in_2">
+      <h2>filter(function)</h2>
+      <p>index 0</p>
+      <p>index 1</p>
+      <p>index 2</p>
+      <p>index 3</p>
+    </section>
+  </div>
+  <script>
+    //find() -> 하위 요소 중에서 검색
+    $('#in_1 .txt1').css('background-color', 'pink');
+    $('#in_1').find('.txt1').text('하위요소');
+
+    //filter() -> 선택된 요소 중에서 검색
+    // 1) 선택자를 기반으로 조건
+    $('#in_1 p').filter('.txt2').css('background-color', 'orange');
+
+    // 2) 콜백함수를 이용해서 다양한 조건을 기반으로 검색 : 콜백함수는 넘겨받는 매개변수가 정해져 있음 , 리턴 타입은 무조건 boolean
+    $('#in_2 p').filter(function(index, element) {
+      let idx = element.textContent.slice(6, 7);
+      return idx % 3 == 0;
+    }).css('color', 'red');
+  </script>
+</body>
+</html>

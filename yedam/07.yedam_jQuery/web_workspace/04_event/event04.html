@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>event04</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <div onclick="alert('내용이 수정되었습니다.')">
+    <p onclick="alert('버튼');">
+      <a href="https://www.naver.com" class="btn1">버튼1</a>
+    </p>
+    <p class="txt1">내용1</p>
+    <p onclick="alert('버튼2');">
+      <a href="https://www.google.com" class="btn2">버튼2</a>
+    </p>
+    <p class="txt2">내용2</p>
+    <p>
+      <button class="btn3">버튼3</button>
+    </p>
+    <p class="txt3">내용3</p>
+  </div>
+  <script>
+    // a 태그 모두 default event 동작을 막고 이벤트 버블링을 멈춤
+    // 1) event 객체를 이용
+      $('.btn1').click(function(e) {
+        e.preventDefault(); //기본 이벤트 차단
+        e.stopPropagation(); //이밴트 버블링을 멈춤 (하지만 아예 버블링이 차단되어 흐름이 막힘 )
+        /*
+        if(event.target == event.currentTarget) {
+          alert('자신이 이벤트를 발생한 경우');
+        }
+        */
+        $('.txt1').css('background-color', 'green');
+      });
+    // 2) jQuery에서만 가능
+    $('.btn2').on('click', function() {
+      
+      $('.txt2').css('background-color', 'yellow');
+      //기본 이벤트 막음 + 이벤트 버블링 stop (자바스크립트는 기본 이벤트 제어만 가능)
+      return false;
+    });
+  </script>
+</body>
+</html>

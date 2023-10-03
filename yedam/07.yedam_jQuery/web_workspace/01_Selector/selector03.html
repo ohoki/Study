@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>selector03</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>탐색 선택자1</h1>
+    <ul id="menu">
+      <li>내용1</li>
+      <li>내용2</li>
+      <li>내용3</li>
+      <li>내용4</li>
+      <li>내용5</li>
+    </ul>
+  </div>
+  <script>
+    //first, last
+    $('#menu li:first').text('first 변경');
+    $('#menu li:last').text('last 변경');
+
+    let liList = $('#menu li');
+    liList.first().css('color', 'red');
+    liList.last().css('color', 'green');
+
+    //even : 홀수번째 요소 -> 짝수 인덱스
+    //odd : 짝수번째 요소 -> 홀수 인덱스
+    let oddTag = $('#menu li:odd');
+    for(let tag of oddTag) {
+      console.log(tag);
+    }
+    //for of -> 객체를 순환할 때 사용
+    //for in -> 배열을 순환할 때 사용
+    let tObj = {
+      'employeeId' : 100,
+      'firstName' : 'Steven',
+      'lastName' : 'King'
+    }
+    for(let field in tObj) {
+      console.log(field, tObj[field]);
+    }
+
+    let tArray = [100, 'Steven', 'King'];
+    for(let index in tArray) {
+      console.log(index);
+    }
+
+    //eq, lt, gt -> 인덱스를 이용
+    $('#menu li:eq(3)').text('내용을 수정합니다');
+    $('#menu li').eq(3).css('color', 'orange');
+
+    //lt : 기준 인덱스 보다 작다, gt : 기준 인덱스 보다 크다
+    $('#menu li:lt(2)').text('lt에 해당');
+  </script>
+  <div>
+    <h1>탐색 선택자2</h1>
+    <ol>
+      <P>P태그</P>
+      <li >내용1-1</li>
+      <li >내용1-2</li>
+      <li >내용1-3</li>
+      <li >내용1-4</li>
+      <li >내용1-5</li>
+      <li >내용1-6</li>
+    </ol>
+    <ol>
+      <li >내용2-1</li>
+      <li >내용2-2</li>
+      <li >내용2-3</li>
+    </ol>
+    <ol>
+      <li>추가된 내용</li>
+    </ol>
+  </div>
+  <script>
+    //first-of-type, last-of-type
+    $('ol li:first-of-type').text('첫번째');
+    $('ol li:last-of-type').text('마지막');
+
+    //nth-child (모든 자식의 순서에서 찾음), nth-of-type (해당되는 자식 태그 요소에서의 순서를 찾음) => 1부터 시작 (0 x)
+    $('ol li:nth-child(1)').text('nth-child 첫번째');
+    $('li:nth-of-type(3n)').css('border', '5px solid black')
+
+    //only-child (형제가 없는 요소 - 나밖에 없을 때), slice(start index, end index) : start ~ end-1
+    $('li:only-child').text('자식요소');
+
+    $('ol li').slice(1,3).css('background-color', 'skyblue');
+  </script>
+</body>
+</html>

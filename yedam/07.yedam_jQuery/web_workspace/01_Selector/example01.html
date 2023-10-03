@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>example01</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <div id="date">
+    <div>
+      <input type="text" id="txDt" value="2023-12-25">
+    </div>
+    <div>
+      <p id="holiday">크리스마스 이브</p>
+      <input type="text" size="3">년
+      <input type="text" class="date" size="3">월
+      <input type="text" size="3">일
+      <button type="button">출력</button>
+    </div>
+    <div id="msg">
+      <div>
+        <label>
+          <p class="title"></p>
+          <input type="text">
+        </label>
+      </div>
+    </div>
+  </div>
+  <script>
+    let txDt = $('#txDt').val();
+    let txDtArray = txDt.split('-');
+    let christmasDateInputs = $('#holiday').nextUntil('button');
+    let christmasEveDate = "";
+
+    for(let i=0; i<christmasDateInputs.length; i++) {      
+      christmasDateInputs[i].value = txDtArray[i];
+      
+      if(i == 2) {
+        christmasEveDate += christmasDateInputs[i].value - "1";
+      } else {
+        christmasEveDate += christmasDateInputs[i].value + "/";
+      }
+    }
+
+    $('button').on('click', function(e) {
+      $('.title').text('크리스마스 이브, Hello, World!');
+      $('label input').val(christmasEveDate);
+    });
+  </script>
+</body>
+</html>

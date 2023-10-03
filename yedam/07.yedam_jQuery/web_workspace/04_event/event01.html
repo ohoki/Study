@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>event01</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<!-- addEventListner 및 화살표 함수에서는 this 사용 X-->
+<body>
+  <button type="button" id="btn">First</button>
+  <button type="button">Second</button>
+  <script>
+    //단일 이벤트 등록 : 이벤트 별로 개별 메소드
+    $('#btn').click(function(e) {
+      $('body').append('<p>단일 이벤트 등록</p>');
+    });
+
+    $('#btn').on('click', function(e) {
+      alert('on 메소드 사용');
+    });
+    //그룹 이벤트 등록 : on() -> 여러 이벤트를 동시에 등록
+    // 1) 서로 다른 이벤트에 동일한 동작을 할 경우
+    $('#btn').next().on('click mouseover',function(e) {
+      $('body').append('<p>단일 이벤트 등록</p>');
+    });
+
+    // 2) 각 각 이벤트에 서로 다른 동작을 등록할 경우
+    $('#btn').next().on({
+      "click" : function(e){alert('그룹 이벤트로 click 이벤트 등록');},
+      "mouseover" : function(e){ $('body').append('<p>단일 이벤트 등록</p>');}
+    });
+
+    //특정 이벤트에 등록된 핸들러 삭제 : off()
+    // 1) 매개변수가 아무것도 없는 경우 -> 등록된 모든 이벤트 삭제
+    $('#btn').next().off();
+
+    // 2) 특정 이벤트를 매개변수로 넘기는 경우 -> 해당 이벤트의 이벤트 핸들러 모두 삭제
+    $('#btn').next().off('click');
+
+    // 3) 특정 이벤트의 특정 이벤트 핸들러를 삭제하고 싶은 경우 (익명함수만 가능)
+    $('#btn').next().on('click', appendTag);
+    $('#btn').next().off('click', appendTag);
+
+    function appendTag(e) {
+      $('body').append('<p>단일 이벤트 등록</p>');
+    }
+  </script>
+</body>
+</html>

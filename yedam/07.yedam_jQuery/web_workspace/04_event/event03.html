@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>event03</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<!--
+  Event -> 주요 필드 target, currentTarget
+        -> 주요 메서드 preventDefault( 기본 이벤트 차단 ), stopPropagation( 버블링 차단 )
+-->
+<!--
+  캡쳐링 vs 버블링
+    target( 고정 ), currentTarget( 전파 )
+-->
+<body>
+  <!-- 이벤트 버블링 -->
+  <form>
+    <div>
+      <p>
+        <a>선택</a>
+        <input type="text" id="msg">
+      </p>
+    </div>
+  </form>
+  <script>
+    // $('*').on('click',log);
+    
+    function log(e) {
+      alert("현재 태그 : " + e.currentTarget.tagName);
+      if(e.currentTarget.tagName == 'DIV') {
+        e.stopPropagation();
+      }
+    }
+  </script>
+  <!-- 각 태그의 on 속성 -->
+  <!-- onclick의 경우 간단한 페이지 이동이나 alert 정도만 사용하고 그 외엔 모두 addEventListner 사용하기-->
+  <input type="text">
+  <button type="button" class="btn">등록</button>
+  <input type="text">
+  <button type="button" class="btn">등록</button>
+  <input type="text">
+  <button type="button" class="btn">등록</button>
+
+  <script>
+    $('.btn').click(appendP);
+    
+    function appendP(e) {
+      let btn = e.currentTarget;
+      let inputVal = $(btn).prev().val();
+      $('body').append('<p>' + inputVal + '</p>');
+    }
+  </script>
+</body>
+</html>

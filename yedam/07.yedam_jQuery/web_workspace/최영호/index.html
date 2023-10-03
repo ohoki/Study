@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="css/style.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+	<script>
+		$(function() {
+			empList();
+
+			$('form').on('submit', function(e) {
+			e.preventDefault();
+			
+			let userInfo = getUserInfo();
+			empInsert(userInfo);
+			});
+
+			$('#btn button').on('click', checkedEmpInfoDel);
+
+			$('#job').on('click', createSelectBox);
+		})
+	</script>
+	<hr>
+	<form>
+		<div id="input_data">
+			<label for="emp_id">사원번호</label><input type="number" id="emp_id" name="employee_id"><br>
+			<label for="last_name">성</label><input type="text" id="last_name" name="last_name"><br>
+			<label for="first_name">이름</label><input type="text" id="first_name" name="first_name"><br>
+			<label for="email">이메일</label><input type="text" id="email" name="email"><br>
+			<label for="job">직책</label><input type="text" id="job" name="job_id"><br>
+		</div>
+		<div id="btn">
+			<input type="submit" value="저장"><br>
+			<button type="button">선택삭제</button>
+		</div>
+	</form>
+	<table id="list">
+	</table>
+
+	<script>
+		const header = ['employee_id', 'last_name', 'first_name', 'email', 'job_id'];
+
+		// 1) 전체조회
+		function empList() {
+      $.ajax({
+        url : 'http://192.168.0.37/myserver/empSelect',
+        type : 'get',
+        success : function(data) {
+					//기존 테이블 제거
+          $('#list').children().remove();
+
+          //thead
+          let theadTag = $('<thead/>');
+          let trTag = $('<tr/>');
+          let inputTag = $('<input/>').prop('type', 'checkbox');
+					let addThInput = $('<th/>');
+					let addTh = $('<th/>').text('Delete');
+
+					addThInput.append(inputTag);
+          trTag.append(addThInput);
+
+          for(let field of header) {
+            let thTag = $('<th/>').text(field);
+            trTag.append(thTag);
+          }
+
+					trTag.append(addTh);
+
+					theadTag.append(trTag);
+          $('#list').append(theadTag);
+
+					//tbody
+          let tbodyTag = $('<tbody/>');
+
+          $.each(data, function(idx, obj) {
+            let addTdInput = $('<td/>');
+						let deleteBtn = $('<button/>').prop('type', 'button').text('Delete');
+						$(deleteBtn).on('click', deleteEmpInfo);
+						let inputTag = $('<input/>').prop('type', 'checkbox');
+						let tdTag = $('<td/>');
+            
+						trTag = $('<tr/>');
+
+						addTdInput.append(inputTag);
+            trTag.append(addTdInput);
+
+            for(let field of header) {
+              let text = obj[field];
+              let tdTag = $('<td/>').text(text);
+
+              trTag.append(tdTag);
+            }
+
+						tdTag.append(deleteBtn);
+
+						trTag.append(tdTag);
+
+            tbodyTag.append(trTag);
+            $('#list').append(tbodyTag);
+          })
+        },
+        error : function(reject) {
+          console.log(reject);
+        }
+      });
+    }
+
+		// 2) 2) 등록 -> 직책 : <select> 사용, 입력폼 초기화
+			function empInsert(obj) {
+      $.ajax({
+        url : 'http://192.168.0.37/myserver/empInsert',
+        type : 'post',
+        data : obj,
+        success : function(data) {
+          if(data != null) {
+						empList();
+
+						let inputList = $('#input_data input');
+
+						$.each(inputList, function(idx, obj) {
+							obj.value = "";
+						});
+          }
+        },
+        error : function(reject) {
+          console.log(reject);
+        }
+      })
+    }
+
+		// 3) 개별삭제
+		function deleteEmpInfo(event) {
+      let trTag = event.currentTarget.closest('tr');
+			let empId = $(trTag).children().eq(1).text();
+			$.ajax({
+        url : 'http://192.168.0.37/myserver/empDelete',
+        type : 'post',
+        data : {employee_id : empId},
+        success : function(data) {
+          if( data != null) {
+            alert('삭제완료!!');
+            empList();
+          }
+        },
+        error : function(reject) {
+          console.log(reject);
+        }
+      })
+    }
+
+		// 4) 선택삭제 -> 전체선택 X
+		function checkedEmpInfoDel(event) {
+      let checkedEmps = [];
+      
+      $('input[type="checkbox"]:checked').each(function(idx, input) {
+        let empId = input.parentNode.nextElementSibling.textContent;
+        let empObj = { employee_id : empId } ;
+
+        checkedEmps.push(empObj);
+      });
+
+      console.log(checkedEmps);
+
+      $.ajax ({
+        url : 'http://192.168.0.37/myserver/deleteEmpList',
+        type : 'post',
+        contentType : 'application/json',
+        data : JSON.stringify(checkedEmps),
+        success : function(result) {
+          if(result != null) {
+            let message = result.success + '건이 삭제되었습니다.';
+            alert(message);
+            empList();
+          }
+        },
+        error : function(reject) {
+          console.log(reject);
+        }
+      })
+    }
+
+		// 5) 셀렉트 박스
+		function createSelectBox(event) {
+			$.ajax({
+				url : 'http://192.168.0.37/myserver/empJob',
+        type : 'get',
+				success : function(data) {
+					let selectTag = $('<select/>').prop('name', 'job_title');
+					selectTag.on('change', function(e) {
+						$('#job').val(selectTag.val());
+					})
+					for(let field of data['jobs']) {
+							let optionTag = $('<option/>').text(field['job_title']);
+							optionTag.prop('value', field['job_id']);
+              selectTag.append(optionTag);
+            }
+						$('#input_data').append(selectTag);
+				},
+				error : function(reject) {
+					console.log(reject);
+				}
+			})
+		}
+
+		// 유틸 함수
+		function getUserInfo() {
+      let inputList = $('form').serializeArray();
+
+      let userInfo = {};
+      $.each(inputList, function(idx, obj) {
+        userInfo[obj.name] = obj.value;
+      });
+      return userInfo;
+    }
+	</script>
+</body>
+</html>

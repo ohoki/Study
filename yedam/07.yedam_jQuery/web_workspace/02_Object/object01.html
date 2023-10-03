@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>object01</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <style>
+    .aqua {background-color: aqua;}
+    .red {background-color: red;}
+    .green {background-color: green;}
+    .yellow {background-color: yellow;}
+  </style>
+</head>
+<body>
+  <div id="ex01">
+    <h1>
+      <strong>객체 조작 및 생성</strong>
+    </h1>
+    <section id="sec_1">
+      <h2>
+        <em>html()</em>
+      </h2>
+      <p>내용1</p>
+    </section>
+    <section id="sec_2">
+      <h2>
+        <em>text()</em>
+      </h2>
+      <p>내용2</p>
+    </section>
+  </div>
+  <script>
+    //val() : value속성을 제어 -> input, textarea, select
+
+    
+    //html() : 태그의 모든 하위요소를 가져와서 문자열로 반환 -> innerHtml (보안상 사용이 권장되지 않음)
+    let html = $('#sec_1').html();
+    console.log(html);
+    $('#sec_1').html('<a href="#">text1</a>');
+
+    //text() : 태그의 모든 텍스트 반환(하위 요소의 텍스트 포함) -> textContent
+    let text = $('#sec_2').text();
+    console.log(text);
+    $('#sec_2').text('<a href="#">text1</a>');
+
+    //css() : style 속성
+    $('#sec_1').css('background-color', 'orange').css('border', '1px solid yellow');
+    $('#sec_2').css({
+                    'background-color' : 'skyblue',
+                    'border' : '1px solid black'
+                });
+  </script>
+  <div id="ex02">
+    <p id="p1">내용1</p>
+    <p id="p2">내용2</p>
+    <p id="p3">내용3</p>
+    <p id="p4" class="green">내용4</p>
+    <p id="p5" class="yellow">내용5</p>
+    <p id="p6"></p>
+  </div>
+  <script>
+    //자바스크립트
+    document.getElementById('p1').classList;
+
+    //class 속성 : 순수하게 복수의 값을 가짐
+    //addClass() : 기존 class 속성에 값을 추가
+    $('#p1').addClass('aqua');
+
+    //removeClass() : 기존 class 속성에 해당 값을 삭제
+    $('#p1').removeClass();
+    
+    //toggleClass() : 기존 class 속성에 해당 값이 존재하면 삭제, 없으면 추가
+    $('#p3').toggleClass('green');
+    $('#p4').toggleClass('green');
+
+    //hasClass() : 기존 class 속성에 해당값이 존재하는 유무를 확인 -> boolean 값
+    let result = $('#p5').hasClass('yellow');
+    $('#p6').text(result);
+  </script>
+  <div id="ex03">
+    <h1>
+      <strong>객체 조작 및 생성</strong>
+    </h1>
+    <section id="sec01">
+      <h2>
+        <img src="clover.PNG" alt="이미지" style="border : 2px solid black">
+      </h2>
+    </section>
+    <a href="get_comment" href="#comments">코멘트</a>
+  </div>
+  <script>
+    // attr() -> html의 attribute를 조작 : html을 로딩하는 순간 각 태그가 가지고 있는 속성
+    let varAttr = $('#sec01 img').attr('src');
+    console.log('attr', varAttr);
+    // $('#sec01 img').attr('width', 200);
+
+    // prop() -> Dom의 property를 조작 : 해당 사이트가 종료되기 전까지 변경되는 속성값
+    let varProp = $('#sec01 img').prop('src');
+    console.log('prop', varProp);
+    $('#sec01 img').prop('width', 200);
+  </script>
+  <div id="id04">
+    <form action="#" id="form_1">
+      <div>
+        <label for="ch1">체크1</label>
+        <input type="checkbox" name="chk1" id="chk1"> 
+        <label for="ch2">체크2</label>
+        <input type="checkbox" name="chk2" id="chk2" checked> 
+        <label for="ch3">체크3</label>
+        <input type="checkbox" name="chk3" id="chk3"> 
+      </div>
+      <div>
+        <select name="select_1" id="select_1">
+          <option value="opt1">옵션1</option>
+          <option value="opt2">옵션2</option>
+          <option value="opt3" selected>옵션3</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <script>
+    $('#chk2').prop('checked', false);
+    let checkVal = $('#chk2').prop('checked');
+    console.log('prop : ', checkVal); 
+    //prop :  false
+
+    checkVal = $('#chk2').attr('checked');
+    console.log('attr : ', checkVal);
+    //attr :  checked
+  </script>
+</body>
+</html>

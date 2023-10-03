@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>selector02</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <!-- 관계 선택자 -->
+  <div id="wrap">
+    <div id="inner_wrap">
+      <h1>제목1</h1>
+      <h2>제목2</h2>
+      <h3>제목3</h3>
+      <p>내용</p>
+      <div>
+        <h1>하위 요소1</h1>
+        <h2>하위 요소2</h2>
+      </div>
+    </div>
+  </div>
+  <script>
+    //부모 선택자
+    $('#inner_wrap').parent().css('border', '1px solid black');
+
+    //하위 요소 선택자
+    $('#wrap h1').css('border', '1px solid red');
+
+    //자식 요소 선택자
+    $('#inner_wrap > h1').css('border', '1px solid green');
+    $('#inner_wrap').children('h2').text('children() 함수 사용');
+    $('div > h1').css('color', 'yellow');
+  </script>
+  
+  <!-- 형제 관계 -->
+  <div id="content">
+    <h1>인접 관계 선택자</h1>
+    <p>내용1</p>
+    <p class="txt">내용2</p>
+    <p>내용3</p>
+    <p>내용4</p>
+    <span>추가한 내용</span>
+  </div>
+  <script>
+    //형(이전) 요소 선택자
+    $('.txt').prev().css('background-color', 'yellow')
+                    .css('border', '2px solid red');
+    $('.txt').prevAll().text('이전 요소들');
+    $('.txt').prevUntil('h1').css('border', '10px solid green');
+
+    //동생(이후) 요소 선택자
+    $('.txt').next().next().css('color', 'red');
+    $('.txt').nextAll().text('다음 요소들');
+    $('.txt').nextUntil('sapn').css('border', '10px solid skyblue');
+
+    $('.txt + p').text('선택');
+  </script>
+
+  <hr>
+
+  <div>
+    <h5 class="title">선택자</h5>
+    <section>
+      <div>
+        <p class="txt1">내용</p>
+      </div>
+    </section>
+    <section>
+      <div>
+        <p class="txt2">내용</p>
+      </div>
+    </section>
+  </div>
+  <script>
+    //상위 요소 선택자
+    $('.txt2').parents('div').css('border', '3px solid yellow'); //모든 조상
+    $('.txt1').closest('div').css('border', '3px solid blue'); //가장 가까운 조상
+
+    //자기를 제외한 전체 형제 요소 선택자
+    $('h5').siblings().css('background-color', 'pink');
+
+    
+  </script>
+</body>
+</html>

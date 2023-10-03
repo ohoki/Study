@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>selector05</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <div id="wrap">
+    <p>내용1</p>
+    <p style="display: none;">내용2</p>
+    <p>내용3</p>
+  </div>
+  <form action="#">
+    <p id="zone1">
+      <select name="course" id="course">
+        <option value="opt1">옵션1</option>
+        <option value="opt2" selected>옵션2</option>
+        <option value="opt3">옵션3</option>
+      </select>
+    </p>
+    <p id="zone2">
+      <input type="checkbox" name="hobby1" value="book">독서
+      <input type="checkbox" name="hobby2" value="bike" checked>자전거
+      <input type="checkbox" name="hobby3" value="hiking" checked>등산
+    </p>
+    <p id="zone3">
+      <input type="radio" name="gender" value="male">남성
+      <input type="radio" name="gender" value="female" checked>여성
+    </p>
+  </form>
+  <script>
+    // hidden, visible
+    $('#wrap p:hidden').css('display', 'block');
+    $('#wrap p:visible').css('display', 'none');
+
+    //selected
+    let selected = $('#course :selected').val();
+    let content = $('#course').val();
+    //value값만 가지고 온다면 결국 두개는 같은거 하지만 조금 더 자세한 정보를 가지고 올 때 selected를 사용할 수 있다.
+    console.log(selected, content);
+
+    //jQuery VS Javascript
+    //1) 선택된 option 태그
+    $('#course :selected');
+    let jsSelect = document.getElementById('course');
+    let selectedOpt = jsSelect.options[jsSelect.selectedIndex];
+    console.log(selectedOpt);
+
+    //2)선택된 값
+    $('#course :selected').val();
+    document.getElementById('course').value;
+
+    //checked
+    //1) checkbox -> 복수 허용
+    let tags = $('#zone2 :checked');
+    for(let i=0; i < tags.length; i++) {
+      console.log(tags[i].value);
+    }
+    // -> javascript 버전
+    tags = document.querySelectorAll('input[name^=hobby]:checked');
+    tags = document.querySelectorAll('#zone2 input:checked');
+    for(let i=0; i < tags.length; i++) {
+      console.log(tags[i].value);
+    }
+
+    //2) radio -> 무조건 한건
+    content = $('#zone3 :checked').val();
+    console.log(content);
+    // -> javascript 버전
+    content = document.querySelector('input[name="gender"]:checked');
+    content = document.querySelector('#zone3 input:checked');
+    console.log(content.value);
+  </script>
+</body>
+</html>

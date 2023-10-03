@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>array02</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <script>
+    let arry1 = ["서울", "대전", "부산", "전주"];
+
+    let arry2 = ["한국", "미국", "일본", "중국"];
+
+    let obj1 = {"name" : "정부장", "area" : "서울"};
+
+    let arry3 = [
+      {"name" : "김대리", "area" : "대전"},
+      {"name" : "이사원", "area" : "부산"},
+      {"name" : "하부장", "area" : "전주"},
+      {"name" : "유전무", "area" : "서울"}
+    ];
+
+    //inArray() : 배열 안에 데이터가 있다면 해당 인덱스, 없다면 -1 을 반환
+    if($.inArray("부산", arry1) > -1 ) {
+      console.log("해당 데이터가 존재합니다.");
+    }
+
+    //isArray() : 매개변수로 넘어온 값이 배열인지 확인
+    console.log("arry2의 배열여부 : ", $.isArray(arry2));
+    console.log("obj1의 배열여부 : ", $.isArray(obj1));
+
+    //$.merge() : 두개의 배열을 하나의 배열로 변환 -> 첫번째 매개변수에 두번째 매개변수를 추가 ( 새로운 배열 생성 X, 기존 데이터 변경 )
+    $.merge(arry2, arry1);
+    
+    $.each(arry2, function(idx, value) {
+      console.log(value);
+    });
+  </script>
+
+  <div id="ex02">
+    <ul>
+      <li>내용1</li>
+      <li>내용2</li>
+      <li id="list3">내용3</li>
+      <li>내용4</li>
+    </ul>
+  </div>
+  <script>
+    // index() -> 선택자를 이용한 결과 중에 특정한 검색조건을 만족하는 요소의 인덱스값
+    let search = $('#ex02 li');
+    let index = search.index($('#list3'));
+    let tag = search.eq(index);
+
+    console.log(tag);
+  </script>
+</body>
+</html>

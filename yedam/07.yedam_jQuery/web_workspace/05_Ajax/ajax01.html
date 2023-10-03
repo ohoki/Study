@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ajax01</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <script>
+    /*
+    $.ajax({
+      url : 접속할 주소,
+      type : 데이터를 전송하는 방식(method: get, post, put, delete 등),
+      data : 전송할 데이터 (클라이언트가 서버로 보내는 데이터),
+      contentType : 전송할 데이터의 컨텐츠 타입 : application/x-www-form-urlencoded 가 default값 / json으로 보내려면 application/json ,
+      dataType : 리턴되는 데이터의 타입(text, json, xml 등) -> 리턴 타입에 맞춰서 알아서 파싱되어 돌아옴,
+      success : function(data) {
+        전송에 성공했을 경우
+      },
+      error : function(reject) {
+        전송에 실패했을 경우
+        console.log(reject);
+      },
+
+      //추가 속성 (가능하면 안쓰길)
+      async : 비동기 제어 - default가 true // 값을 false로 주게되면 동기식으로 동작 (단, 페이지 처리는 불가하다)
+      beforeSend : 전송이 이루어지기 직전에 해야하는 작업 등록
+    })
+    */
+  </script>
+  
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>last_name</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+    <h1>유저 정보</h1>
+    <form>
+      <label>id           : <input type="number" name="id" id="id" readonly></label><br>
+      <label>first_name   : <input type="text" name="first_name" id="first_name"></label><br>
+      <label>last_name    : <input type="text" name="last_name" id="last_name"></label><br>
+      <label>email        : <input type="email" name="email" id="email"></label><br>
+      <label>avatar       : <img src="" name="avatar" alt="이미지"></label><br>
+      <button type="reset">초기화</button>
+      <button type="submit">저장</button>
+    </form>
+  </div>
+  <script>
+    // ===== 간단한 CRUD =====
+    // 전체 조회 : https://reqres.in/api/users?page=2 , GET
+
+    $.ajax({
+      url : 'https://reqres.in/api/users?page=2',
+      type : 'get',
+      success : function(result) {
+        let data = result.data;
+        
+        $(data).each(function(idx, obj) {
+          let trTag = $('<tr/>');
+          trTag.on('click', function(e) {
+            if(e.target.tagName == 'BUTTON') return;
+
+            let id = e.currentTarget.firstElementChild.textContent;
+            selectUser(id);
+          });
+
+          let tdTag = $('<td/>').text(obj['id']);
+          trTag.append(tdTag);
+
+          tdTag = $('<td/>').text(obj['last_name']);
+          trTag.append(tdTag);
+
+          let btnTag = $('<button/>').text('Del');
+          tdTag = $('<td/>').append(btnTag);
+          trTag.append(tdTag);
+          
+          btnTag.on('click', function(e) {
+            //e.stopPropagation(); -> 아예 버블링을 차단  
+            let id = e.currentTarget.closest('tr').firstElementChild.textContent;
+            deleteUser(id);
+          });
+
+          $('tbody').append(trTag);
+        });
+      },
+      error : function(reject) {
+        console.log(reject);
+      }
+    })
+    
+    // 단건 조회  (비동기로 태그를 생성한 경우 이벤트 리스너가 작동되지 않는다 ) - https://reqres.in/api/users/ + id , GET
+    
+    function selectUser(id) {
+      $.ajax({
+        url :'https://reqres.in/api/users/' + id,
+        type :'get',
+        success : function(result) {
+          let data = result.data;
+          
+          for(let field in data) {
+            let selector = 'form input[name="'+field+'"]';
+            $(selector).val(data[field]);
+          }
+
+          $('form img[name="avatar"]').prop('src', data.avatar);
+        },
+        error : function(reject) {
+          console.log(reject);
+        }
+      });
+    }
+
+    $('form').on('submit', function(e) {
+      e.preventDefault();
+      
+      let userInfo = getUserInfo();
+      if(userInfo.id != '') {
+        updateUser(userInfo);
+      } else {
+        createUser(userInfo);
+      }
+    });
+    
+    //등록 : https://reqres.in/api/users/ , POST -> 값을 body에 집어넣어서 보냄
+
+    function createUser(obj) {
+      $.ajax({
+        url : 'https://reqres.in/api/users',
+        type : 'post',
+        contentType : 'application/json',
+        data : JSON.stringify(obj),
+        success : function(data) {
+          if(data != null) {
+            $('form input[name="id"]').val(data.id);
+            alert(`정상적으로 등록 되었습니다.`);
+
+            let trTag = $('<tr/>');
+            let tdTag = $('<td/>').text(data['id']);
+          trTag.append(tdTag);
+
+          tdTag = $('<td/>').text(obj['last_name']);
+          trTag.append(tdTag);
+
+          let btnTag = $('<button/>').text('Del');
+          tdTag = $('<td/>').append(btnTag);
+          trTag.append(tdTag);
+          $('tbody').append(trTag);
+          }
+        },
+        error : function(reject) {
+          console.log(reject);
+        }
+      })
+    }
+
+    //수정 : https://reqres.in/api/users/ + id , PUT -> 값을 body에 집어넣어서 보냄
+
+    function updateUser(obj) {
+      $.ajax({
+        url :'https://reqres.in/api/users/' + obj.id,
+        type : 'put',
+        contentType : 'application/json',
+        data : JSON.stringify(obj),
+        success : function(result) {
+          if(result != null) {
+            alert(`수정이 완료되었습니다. 수정시간 : ${result['updatedAt']}`);
+          }
+        },
+        error : function(reject) {
+          console.log(reject);
+        }
+      }); 
+    }
+
+    /* jQuery -> Form 태그 내부 값을 가져오는 메소드 
+                1) serialize()   -> QueryString : id=7&first_name=kil-dong&last_name=Hong&...
+                2) serializeArray() -> Object Array : [ {"name" : "id", "value" : "7"}, {"name" : "first_name", "value" : "kil-dong"}, ....  ]  
+    */  
+    function getUserInfo() {
+      let inputList = $('form').serializeArray();
+
+      let userInfo = {};
+      $.each(inputList, function(idx, obj) {
+        userInfo[obj.name] = obj.value; // userInfo['id'] = '7'; 
+      });
+      return userInfo;
+    }
+
+    //삭제 : https://reqres.in/api/users/ + id , DELETE
+
+    function deleteUser(id) {
+      $.ajax({
+        url : 'https://reqres.in/api/users/' + id,
+        type : 'delete',
+        success : function(data, status, xhr) { // xhr - 상세정보
+          if(xhr.status == 204) {
+            alert('정상적으로 삭제되었습니다.');
+          }
+        },
+        error : function(reject) {
+          console.log(reject);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

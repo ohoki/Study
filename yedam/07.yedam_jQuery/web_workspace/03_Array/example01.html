@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>example01</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <div id="list">
+    <!-- 지역: 전주, 부서 : IT, 이름 박수훈 -->
+
+    <!-- 근무 지역 : 서울 -->
+    <ul></ul>
+    <!-- 부서 : 영업 -->
+    <ul></ul>
+    <!-- 부서 : 생산 -->
+    <ul></ul>
+  </div>
+  <script>
+    let data = [
+      {"area" : "서울", "dept" : "영업", "name" : "무대리"},
+      {"area" : "부산", "dept" : "영업", "name" : "홍과장"},
+      {"area" : "대전", "dept" : "생산", "name" : "박사장"},
+      {"area" : "서울", "dept" : "생산", "name" : "김부장"}
+    ];
+    let ulSeoul = $('#list ul:first');
+    let ulSales = ulSeoul.next();
+    let ulProduction = $('#list ul:last');
+    
+    let seoulData = createMap("area", "서울");
+    let salesData = createMap("dept", "영업");
+    let productionData = createMap("dept", "생산");
+
+    addList(ulSeoul, seoulData);
+    addList(ulSales, salesData);
+    addList(ulProduction, productionData);;
+
+    //배열 생성 메소드
+    function createMap(standard, value) {
+      return $.map(data, function(obj, idx) {
+        if(obj[standard] == value) {
+          return obj;
+        }});
+    }
+
+    //ul에 li 추가 메소드
+    function addList(ul, data) {
+      $(data).each(function(idx, obj) {
+      let liTag = $('<li/>').text(`지역 : ${obj['area']}, 부서 : ${obj['dept']}, 이름 : ${obj['name']}`);
+      ul.append(liTag);
+    });
+    };
+  </script>
+</body>
+</html>
