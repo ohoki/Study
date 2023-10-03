@@ -5,7 +5,23 @@ public class Student {
 	private String stdName;
 	private String stdMajor;
 	private int stdPoint;
+	//필드 추가 (그룹 함수 사용을 위한 필드 추가)
+	private double sum;
+	private double avg;
 	
+	//getter & setter
+	public double getSum() {
+		return sum;
+	}
+	public void setSum(double sum) {
+		this.sum = sum;
+	}
+	public double getAvg() {
+		return avg;
+	}
+	public void setAvg(double avg) {
+		this.avg = avg;
+	}
 	public int getStdId() {
 		return stdId;
 	}

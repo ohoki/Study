@@ -17,6 +17,7 @@ public class EmployeesService {
 		}
 	}
 	
+	//단건 조회
 	public void getEmployee() {
 		System.out.println("사번 입력>");
 		int empId = Integer.parseInt(sc.nextLine());
@@ -33,6 +34,7 @@ public class EmployeesService {
 		}
 	}
 	
+	//등록
 	public void insertEmp() {
 		Employees emp = new Employees();
 		

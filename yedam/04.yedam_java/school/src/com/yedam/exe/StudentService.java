@@ -17,7 +17,7 @@ public class StudentService {
 				System.out.println("======================================================");
 				System.out.println("|" + "학번 : " + list.get(i).getStdId());
 				System.out.println("|" + "이름 : " + list.get(i).getStdName());
-				System.out.println("|" + "전공 : " + list.get(i).getStdName());
+				System.out.println("|" + "전공 : " + list.get(i).getStdMajor());
 				System.out.println("|" + "점수 : " + list.get(i).getStdPoint());
 			}
 		}
@@ -78,6 +78,7 @@ public class StudentService {
 		}
 		
 	}
+	
 	//학생 변경
 	public void updateStd() {
 		Student std = new Student();
@@ -96,4 +97,17 @@ public class StudentService {
 		}
 	}
 	
+	//분석 (전공 별 성적 합계 및 평균) -> 합계/평균 = 학생 수
+	// -> DB에서 조회된 정보를 활용해서 만드는 방식 ( 자바로도 구현할 수 있으나 더 번거롭다. )
+	public void getAnalyze() {
+		List<Student> list = StudentDAO.getInstance().getAnalyze();
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println("==========================================================");
+			System.out.println("'전공 : " + list.get(i).getStdMajor());
+			System.out.println("'합계 : " + list.get(i).getSum());
+			System.out.println("'평균 : " + list.get(i).getAvg());
+			System.out.println("'학생수 : " + (int)(list.get(i).getSum()/list.get(i).getAvg()) + "명");
+		}
+	}
 }

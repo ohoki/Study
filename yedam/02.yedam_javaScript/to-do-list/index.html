@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TO_DO_LIST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/8af996bb56.js" crossorigin="anonymous"></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <div id="container">
+    <!-- 헤더 -->
+    <header>
+      <h2>TO DO LIST<i class="fa-solid fa-book-open"></i></h2>
+      <p>우리의 소중한 하루를 알차게~!</p>
+    </header>
+
+    <!-- 입력 창 -->
+    <section id="topSection">
+      <div id="addList">
+        <input type="text" id="addInput" name="doInput" autofocus>
+      <button type="button" id="addBtn" onclick="addList()">추가하기</button>
+      </div>
+      <p id="headerClock" ">clock</p>
+    </section>
+
+    <!-- 목록 창 -->
+    <section id="bottomSection">
+      <div class="list_flex">
+        <h2>DO LIST</h2>
+        <span>
+          <button type="button" onclick="doListAll()">전체선택</button>
+          <button type="button" onclick="doListDeleteItems()">삭제</button>
+        </span>
+      </div>
+      <div id="doList" class="list_scrollbar">
+
+      </div>
+
+      <div class="list_flex">
+        <h2>HISTORY</h2>
+        <span>
+          <button type="button" onclick="historyAll()">전체선택</button>
+          <button type="button" onclick="historyDeleteItems()">삭제</button>
+        </span>
+      </div>
+      <div id="history" class="list_scrollbar">
+
+      </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+      <p>2023 Copyright  o_hoki</p>
+    </footer>
+  </div>
+</body>
+</html>

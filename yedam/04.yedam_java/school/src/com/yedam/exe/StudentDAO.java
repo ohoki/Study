@@ -28,7 +28,7 @@ public class StudentDAO extends DAO{
 		
 		try {
 			conn();
-			String sql = "SELECT * FROM student";
+			String sql = "SELECT * FROM student ORDER BY std_id";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -38,6 +38,7 @@ public class StudentDAO extends DAO{
 				std.setStdName(rs.getString("std_name"));
 				std.setStdMajor(rs.getString("std_major"));
 				std.setStdPoint(rs.getInt("std_point"));
+				list.add(std);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,6 +115,7 @@ public class StudentDAO extends DAO{
 		
 		return result;
 	}
+	
 	//변경
 	public int modifyMajor(Student std) {
 		int result = 0;
@@ -134,7 +136,31 @@ public class StudentDAO extends DAO{
 		return result;
 	}
 	
-	
-	
-	
+	//전공 별 성적 합계 및 평균
+	public List<Student> getAnalyze() {
+		List<Student> list = new ArrayList<>();
+		Student std = null;
+		
+		try {
+			conn();
+			String sql = "SELECT std_major, sum(std_point) total, avg(std_point) avg FROM student GROUP BY std_major";
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				std = new Student();
+				std.setStdMajor(rs.getString("std_major"));
+				std.setSum(rs.getDouble("total"));
+				std.setAvg(rs.getDouble("avg"));
+				
+				list.add(std);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return list;
+	}
 }
