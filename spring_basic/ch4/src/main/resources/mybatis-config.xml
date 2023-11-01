@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <!-- alias는 대소문자 구별하지 않는다 -->
+        <typeAlias alias="BoardDto" type="com.fastcampus.ch4.domain.BoardDto"/>
+        <typeAlias alias="CommentDto" type="com.fastcampus.ch4.domain.CommentDto"/>
+        <typeAlias alias="SearchCondition" type="com.fastcampus.ch4.domain.SearchCondition"/>
+    </typeAliases>
+</configuration>

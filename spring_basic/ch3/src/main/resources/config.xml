@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--scope는 singleton이 default값이고 getBean할 때 마다 새로운 객체를 만들고 싶은 경우 prototype으로 지정해줘야 한다-->
+    <bean id="car" class="com.fastcampus.ch3.Car">
+        <property name="color" value="red"/>
+        <property name="oil" value="100"/>
+        <property name="engine" ref="engine"/>
+        <property name="doors">
+            <array value-type="com.fastcampus.ch3.Door">
+                <ref bean="door" />
+                <ref bean="door" />
+            </array>
+        </property>
+    </bean>
+    <bean id="engine" class="com.fastcampus.ch3.Engine" />
+    <bean id="door" class="com.fastcampus.ch3.Door" scope="prototype"/>
+
+</beans>
