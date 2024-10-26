@@ -1,5 +1,26 @@
-export function readingsOutsideRange(station, min, max) {
-  return station.readings.filter((r) => r.temp < min || r.temp > max);
+export function readingsOutsideRange(station, range) {
+  return station.readings.filter((r) => !range.contains(r.temp));
+}
+
+export class NumberRange {
+  #min;
+  #max;
+  constructor(min, max) {
+    this.#min = min;
+    this.#max = max;
+  }
+
+  get min() {
+    return this.#min;
+  }
+
+  get min() {
+    return this.#max;
+  }
+
+  contains(number) {
+    return number >= this.#min && number <= this.#max;
+  }
 }
 
 const station = {
@@ -12,13 +33,12 @@ const station = {
     { temp: 51, time: '2016-11-10 09:50' },
   ],
 };
-const operationPlan = {
-  temperatureFloor: 51,
-  temperatureCeiling: 53,
-};
 
-readingsOutsideRange(
+const operationPlan = new NumberRange(51, 53);
+
+const result = readingsOutsideRange(
   station,
-  operationPlan.temperatureFloor,
-  operationPlan.temperatureCeiling
+  operationPlan
 );
+
+console.log(result);
