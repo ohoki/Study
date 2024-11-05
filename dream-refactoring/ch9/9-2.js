@@ -3,10 +3,10 @@ class Organization {
     this._name = data.name;
     this._country = data.country;
   }
-  get name() {
+  get title() {
     return this._name;
   }
-  set name(value) {
+  set title(value) {
     this._name = value;
   }
   get country() {
