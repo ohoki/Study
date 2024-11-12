@@ -5,7 +5,7 @@ export function adjustedCapital(instrument) {
 
   return (
     (instrument.income / instrument.duration) * anInstrument.adjustmentFactor;
-  )
+  );
 }
 
 function isEligibleForAdjustedCapital() {
