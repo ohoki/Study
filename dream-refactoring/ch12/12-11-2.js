@@ -1,8 +1,7 @@
-class CatalogItem {
-  constructor(id, title, tags) {
-    this._id = id;
-    this._title = title;
-    this._tags = tags;
+class Scroll {
+  constructor(id, dataLastCleaned, CatalogItem) {
+    super(id, title, tags);
+    this._lastCleaned = dataLastCleaned;
   }
 
   get id() {
@@ -10,18 +9,11 @@ class CatalogItem {
   }
 
   get title() {
-    return this._title;
+    return this._CatalogItem.title;
   }
 
-  hasTag(arg) {
-    return this._tags.includes(arg);
-  }
-}
-
-class Scroll extends CatalogItem {
-  constructor(id, title, tags, dataLastCleaned) {
-    super(id, title, tags);
-    this._lastCleaned = dataLastCleaned;
+  hasTag(aString) {
+    return this._CatalogItem.title.hasTag(aString);
   }
 
   needsCleaning(targetDate) {
@@ -34,3 +26,13 @@ class Scroll extends CatalogItem {
     return this._lastCleaned.until(targetDate, ChronoUnit.DAYS);
   }
 }
+
+const scroll = aDocument.map(
+  (record) => 
+    new Scroll(
+      record.Id,
+      LocalDate.parse(record.lastCleaned),
+      record.catalogData.id,
+      catalog
+    )
+)
